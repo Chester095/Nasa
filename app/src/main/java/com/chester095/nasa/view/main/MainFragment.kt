@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -70,12 +69,18 @@ class MainFragment : Fragment() {
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
-                    /*BottomSheetBehavior.STATE_DRAGGING -> TODO("not implemented")
-                    BottomSheetBehavior.STATE_COLLAPSED -> TODO("not implemented")
-                    BottomSheetBehavior.STATE_EXPANDED -> TODO("not implemented")
-                    BottomSheetBehavior.STATE_HALF_EXPANDED -> TODO("not implemented")
-                    BottomSheetBehavior.STATE_HIDDEN -> TODO("not implemented")
-                    BottomSheetBehavior.STATE_SETTLING -> TODO("not implemented")*/
+                    BottomSheetBehavior.STATE_DRAGGING ->
+                        Toast.makeText(requireContext(), "STATE_DRAGGING", Toast.LENGTH_SHORT).show()
+                    BottomSheetBehavior.STATE_COLLAPSED ->
+                        Toast.makeText(requireContext(), "STATE_COLLAPSED", Toast.LENGTH_SHORT).show()
+                    BottomSheetBehavior.STATE_EXPANDED ->
+                        Toast.makeText(requireContext(), "STATE_EXPANDED", Toast.LENGTH_SHORT).show()
+                    BottomSheetBehavior.STATE_HALF_EXPANDED ->
+                        Toast.makeText(requireContext(), "STATE_HALF_EXPANDED", Toast.LENGTH_SHORT).show()
+                    BottomSheetBehavior.STATE_HIDDEN ->
+                        Toast.makeText(requireContext(), "STATE_HIDDEN", Toast.LENGTH_SHORT).show()
+                    BottomSheetBehavior.STATE_SETTLING ->
+                        Toast.makeText(requireContext(), "STATE_SETTLING", Toast.LENGTH_SHORT).show()
                 }
             }
 

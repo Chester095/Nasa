@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#f6f6fa"
     app:behavior_hideable="false"
-    app:behavior_peekHeight="?actionBarSize"
+    app:behavior_peekHeight="100dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <View
@@ -29,7 +29,7 @@
         android:paddingEnd="10dp"
         android:textColor="#000"
         android:textStyle="bold"
-        android:text=" val title: String,"
+        android:text="@string/loading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_line"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:text="val explanation: String,"
+        android:text="@string/loading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_description_header"

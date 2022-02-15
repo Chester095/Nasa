@@ -1,5 +1,6 @@
 package com.chester095.nasa.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,15 +31,15 @@ class PictureOfTheDayViewModel(
                         response.body()?.let {
                             liveData.postValue(PictureOfTheDayData.Success(it))
                         }
-
                     } else {
-                        // TODO HW вывести ошибку
+                        if (response.isSuccessful == null) {
+                            Log.d("!!! PictureOfTheDay ", " response.isSuccessful ${response.isSuccessful}")
+                        }
                     }
-
                 }
 
                 override fun onFailure(call: Call<PDOServerResponse>, t: Throwable) {
-                    // TODO HW
+                    Log.d("!!! PictureOfTheDay ", " Ошибка $t")
                 }
             }
         )
