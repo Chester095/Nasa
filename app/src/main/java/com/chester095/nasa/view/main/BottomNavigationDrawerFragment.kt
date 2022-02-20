@@ -1,15 +1,18 @@
-package com.gb.material_1728_3.view.main
+package com.chester095.nasa.view.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.chester095.nasa.R
 import com.chester095.nasa.databinding.BottomNavigationLayoutBinding
+import com.chester095.nasa.databinding.FragmentMainBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
+class BottomNavigationDrawerFragment:BottomSheetDialogFragment() {
 
     private var _binding: BottomNavigationLayoutBinding? = null
     val binding: BottomNavigationLayoutBinding
@@ -25,8 +28,8 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.navigationView.setNavigationItemSelectedListener { menu ->
-            when (menu.itemId) {
+        binding.navigationView.setNavigationItemSelectedListener { menu->
+            when(menu.itemId){
                 R.id.navigation_one -> {
                     Toast.makeText(requireContext(), "navigation_one", Toast.LENGTH_SHORT).show()
                 }

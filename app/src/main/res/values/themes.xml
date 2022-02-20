@@ -1,22 +1,48 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Nasa" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
-
-        <item name="android:navigationBarColor">@color/red_500</item>
-        <item name="colorPrimary">@color/red_600</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryContainer">@color/red_100</item>
-        <item name="colorOnPrimaryContainer">@color/red_900</item>
-        <item name="colorPrimaryInverse">@color/red_200</item>
-        <item name="colorSecondary">@color/red_600</item>
-        <item name="colorOnSecondary">@color/white</item>
-        <item name="colorSecondaryContainer">@color/red_100</item>
-        <item name="colorOnSecondaryContainer">@color/red_900</item>
-        <item name="colorTertiary">@color/red_600</item>
-        <item name="colorOnTertiary">@color/white</item>
-        <item name="colorTertiaryContainer">@color/red_100</item>
-        <item name="colorOnTertiaryContainer">@color/red_900</item>
-
+    <style name="MyThemeRed" parent="MyBaseTheme">
+        <item name="superColor">@color/red</item>
     </style>
+
+    <style name="MyBlackBlue" parent="MyBaseTheme">
+        <item name="superColor">@color/red</item>
+        <item name="bottomAppBarStyle">@style/myBottomAppBarStyleBlackBlue</item>
+        <item name="floatingActionButtonStyle">@style/myFloatingActionButtonStyleBlackBlue</item>
+    </style>
+
+    <style name="MyThemeBlue" parent="MyBaseTheme">
+        <item name="superColor">@color/blue</item>
+    </style>
+
+    <style name="MyThemeGreen" parent="MyBaseTheme">
+        <item name="superColor">@color/green</item>
+    </style>
+
+    <style name="MyBaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:navigationBarColor">?superColor</item>
+        <item name="colorPrimary">?superColor</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">?superColor</item>
+        <item name="colorOnPrimaryContainer">?superColor</item>
+        <item name="colorPrimaryInverse">?superColor</item>
+        <item name="colorSecondary">?superColor</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">?superColor</item>
+        <item name="colorOnSecondaryContainer">?superColor</item>
+        <item name="colorTertiary">?superColor</item>
+        <item name="colorOnTertiary">@color/white</item>
+        <item name="colorTertiaryContainer">?superColor</item>
+        <item name="colorOnTertiaryContainer">?superColor</item>
+        <item name="android:statusBarColor">?superColor</item>
+        <item name="chipStyle">@style/myChipStyle</item>
+        <item name="bottomAppBarStyle">@style/myBottomAppBarStyle</item>
+        <item name="tabStyle">@style/myTabStyle</item>
+        <item name="textAppearanceHeadline1">@style/MyTextAppearanceHeadline1</item>
+        <item name="materialButtonStyle">@style/myMaterialButtonStyle</item>
+        <item name="materialCardViewStyle">@style/myMaterialCardViewStyle</item>
+        <item name="bottomNavigationStyle">@style/myBottomNavigationStyle</item>
+    </style>
+
+
 </resources>

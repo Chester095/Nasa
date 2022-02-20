@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 32
 
     defaultConfig {
         applicationId "com.chester095.nasa"
-        minSdk 22
-        targetSdk 31
+        minSdk 24
+        targetSdk 32
         versionCode 1
         versionName "1.0"
 
@@ -19,7 +19,6 @@ android {
     buildFeatures{
         viewBinding true
     }
-
     buildTypes.each {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("apikey.properties").newDataInputStream())

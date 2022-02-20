@@ -6,21 +6,22 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.chester095.nasa.R
 import com.chester095.nasa.databinding.FragmentMainBinding
 import com.chester095.nasa.view.MainActivity
-import com.chester095.nasa.view.chips.ChipsFragment
+import com.chester095.nasa.view.settings.SettingsFragment
 import com.chester095.nasa.viewmodel.PictureOfTheDayData
 import com.chester095.nasa.viewmodel.PictureOfTheDayViewModel
-import com.gb.material_1728_3.view.main.BottomNavigationDrawerFragment
+import com.chester095.nasa.view.main.BottomNavigationDrawerFragment
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+
 
 class MainFragment : Fragment() {
 
@@ -93,14 +94,14 @@ class MainFragment : Fragment() {
         (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
         setHasOptionsMenu(true)
 
-        binding.fab.setOnClickListener {
-            if (isMain) {
+        binding.fab.setOnClickListener{
+            if(isMain){
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
                 binding.fab.setImageResource(R.drawable.ic_back_fab)
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
-            } else {
-                binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_hamburger_menu_bottom_bar)
+            }else{
+                binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_hamburger_menu_bottom_bar)
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
                 binding.fab.setImageResource(R.drawable.ic_plus_fab)
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
@@ -140,10 +141,11 @@ class MainFragment : Fragment() {
                 Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT).show()
             }
             R.id.app_bar_settings -> {
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container, ChipsFragment.newInstance()).commit()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, SettingsFragment.newInstance()).addToBackStack("").commit()
             }
             android.R.id.home -> {
-                BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "ff")
+                BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager,"ff")
             }
         }
         return super.onOptionsItemSelected(item)

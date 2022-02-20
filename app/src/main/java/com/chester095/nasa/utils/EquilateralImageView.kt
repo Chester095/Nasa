@@ -6,9 +6,10 @@ import androidx.appcompat.widget.AppCompatImageView
 
 class EquilateralImageView @JvmOverloads constructor(
     context: Context,
-    attrs: AttributeSet? = null,
+    attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : AppCompatImageView(context, attrs, defStyleAttr) {
+) : AppCompatImageView(context, attributeSet,defStyleAttr) {
+
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, widthMeasureSpec)
