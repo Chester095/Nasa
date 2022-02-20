@@ -15,5 +15,6 @@
     <string name="chip_action">Chip action</string>
     <string name="chip_filter">Chip filter</string>
     <string name="loading">loading...</string>
+    <string name="tab_layout_default">Default</string>
 
 </resources>

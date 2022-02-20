@@ -24,32 +24,32 @@
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Default" />
+                    android:text="@string/chip_default" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipEntry"
                     style="@style/Widget.MaterialComponents.Chip.Entry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Default" />
+                    android:text="@string/chip_default" />
 
                 <com.google.android.material.chip.Chip
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Default" />
+                    android:text="@string/chip_default" />
 
                 <com.google.android.material.chip.Chip
                     style="@style/Widget.MaterialComponents.Chip.Action"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Default" />
+                    android:text="@string/chip_default" />
 
                 <com.google.android.material.chip.Chip
                     style="@style/myChipChoiceStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Choice" />
+                    android:text="@string/chip_choice" />
             </LinearLayout>
 
             <HorizontalScrollView
@@ -58,7 +58,7 @@
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/chipGroup"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     app:singleLine="true"
@@ -68,48 +68,48 @@
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Default" />
+                        android:text="@string/chip_default" />
 
                     <com.google.android.material.chip.Chip
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Default" />
+                        android:text="@string/chip_default" />
 
                     <com.google.android.material.chip.Chip
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Default" />
-
-                    <com.google.android.material.chip.Chip
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Default" />
+                        android:text="@string/chip_default" />
 
                     <com.google.android.material.chip.Chip
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Default" />
+                        android:text="@string/chip_default" />
 
                     <com.google.android.material.chip.Chip
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Default" />
+                        android:text="@string/chip_default" />
 
                     <com.google.android.material.chip.Chip
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Default" />
+                        android:text="@string/chip_default" />
 
                     <com.google.android.material.chip.Chip
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Default" />
+                        android:text="@string/chip_default" />
+
+                    <com.google.android.material.chip.Chip
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/chip_default" />
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>
 
@@ -133,22 +133,19 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.tabs.TabItem
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tab 1" />
+                    android:text="@string/tab_layout_default" />
 
                 <com.google.android.material.tabs.TabItem
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tab 2" />
+                    android:text="@string/tab_layout_default" />
 
                 <com.google.android.material.tabs.TabItem
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tab 3" />
+                    android:text="@string/tab_layout_default" />
             </com.google.android.material.tabs.TabLayout>
 
 

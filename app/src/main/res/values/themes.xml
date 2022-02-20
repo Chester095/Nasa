@@ -1,40 +1,46 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
 
-    <style name="MyThemeRed" parent="MyBaseTheme">
-        <item name="superColor">@color/red</item>
-    </style>
-
-    <style name="MyBlackBlue" parent="MyBaseTheme">
-        <item name="superColor">@color/red</item>
+    <style name="MyOrange" parent="MyBaseTheme">
+        <item name="nasaBackgroundColor">@color/yellow_900</item>
+        <item name="nasaPrimaryColor">@color/yellow_50</item>
+        <item name="nasaPrimaryDarkColor">@color/black</item>
         <item name="bottomAppBarStyle">@style/myBottomAppBarStyleBlackBlue</item>
-        <item name="floatingActionButtonStyle">@style/myFloatingActionButtonStyleBlackBlue</item>
+        <item name="floatingActionButtonStyle">@style/myFloatingActionButtonStyleOrange</item>
     </style>
 
-    <style name="MyThemeBlue" parent="MyBaseTheme">
-        <item name="superColor">@color/blue</item>
+    <style name="MyThemeBlueGray" parent="MyBaseTheme">
+        <item name="nasaBackgroundColor">@color/blue_grey_900</item>
+        <item name="nasaPrimaryColor">@color/blue_grey_50</item>
+        <item name="nasaPrimaryDarkColor">@color/black</item>
+        <item name="bottomAppBarStyle">@style/myBottomAppBarStyleBlackBlue</item>
+        <item name="floatingActionButtonStyle">@style/myFloatingActionButtonStyleOrange</item>
     </style>
 
-    <style name="MyThemeGreen" parent="MyBaseTheme">
-        <item name="superColor">@color/green</item>
+    <style name="MyThemeIndigo" parent="MyBaseTheme">
+        <item name="nasaBackgroundColor">@color/indigo_900</item>
+        <item name="nasaPrimaryColor">@color/indigo_50</item>
+        <item name="nasaPrimaryDarkColor">@color/black</item>
+        <item name="bottomAppBarStyle">@style/myBottomAppBarStyleBlackBlue</item>
+        <item name="floatingActionButtonStyle">@style/myFloatingActionButtonStyleOrange</item>
     </style>
 
     <style name="MyBaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:navigationBarColor">?superColor</item>
-        <item name="colorPrimary">?superColor</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryContainer">?superColor</item>
-        <item name="colorOnPrimaryContainer">?superColor</item>
-        <item name="colorPrimaryInverse">?superColor</item>
-        <item name="colorSecondary">?superColor</item>
-        <item name="colorOnSecondary">@color/white</item>
-        <item name="colorSecondaryContainer">?superColor</item>
-        <item name="colorOnSecondaryContainer">?superColor</item>
-        <item name="colorTertiary">?superColor</item>
-        <item name="colorOnTertiary">@color/white</item>
-        <item name="colorTertiaryContainer">?superColor</item>
-        <item name="colorOnTertiaryContainer">?superColor</item>
-        <item name="android:statusBarColor">?superColor</item>
+        <item name="android:navigationBarColor">?attr/nasaBackgroundColor</item>
+        <item name="colorPrimary">?attr/nasaBackgroundColor</item>
+        <item name="colorOnPrimary">?attr/nasaPrimaryColor</item>
+        <item name="colorPrimaryContainer">?attr/nasaBackgroundColor</item>
+        <item name="colorOnPrimaryContainer">?attr/nasaBackgroundColor</item>
+        <item name="colorPrimaryInverse">?attr/nasaBackgroundColor</item>
+        <item name="colorSecondary">?attr/nasaBackgroundColor</item>
+        <item name="colorOnSecondary">?attr/nasaPrimaryColor</item>
+        <item name="colorSecondaryContainer">?attr/nasaBackgroundColor</item>
+        <item name="colorOnSecondaryContainer">?attr/nasaBackgroundColor</item>
+        <item name="colorTertiary">?attr/nasaBackgroundColor</item>
+        <item name="colorOnTertiary">?attr/nasaPrimaryColor</item>
+        <item name="colorTertiaryContainer">?attr/nasaBackgroundColor</item>
+        <item name="colorOnTertiaryContainer">?attr/nasaBackgroundColor</item>
+        <item name="android:statusBarColor">?attr/nasaBackgroundColor</item>
         <item name="chipStyle">@style/myChipStyle</item>
         <item name="bottomAppBarStyle">@style/myBottomAppBarStyle</item>
         <item name="tabStyle">@style/myTabStyle</item>
@@ -43,6 +49,4 @@
         <item name="materialCardViewStyle">@style/myMaterialCardViewStyle</item>
         <item name="bottomNavigationStyle">@style/myBottomNavigationStyle</item>
     </style>
-
-
 </resources>

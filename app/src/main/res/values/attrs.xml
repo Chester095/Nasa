@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="superColor" format="color"/>
+    <attr name="nasaBackgroundColor" format="color"/>
+    <attr name="nasaPrimaryColor" format="color"/>
+    <attr name="nasaPrimaryDarkColor" format="color"/>
 </resources>

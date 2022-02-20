@@ -11,11 +11,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // SP
-        setTheme(R.style.MyBlackBlue)
+        setTheme(R.style.MyThemeBlueGray)
         setContentView(R.layout.activity_main)
 
-        val textView = TextView(this).apply {
-            text=""
+        TextView(this).apply {
+            text="sdfsdfsdg"
             textSize=30f
             gravity = Gravity.NO_GRAVITY
 
