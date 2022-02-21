@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         TextView(this).apply {
-            text="sdfsdfsdg"
+            text=""
             textSize=30f
             gravity = Gravity.NO_GRAVITY
 
