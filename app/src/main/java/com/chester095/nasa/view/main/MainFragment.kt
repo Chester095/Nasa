@@ -6,10 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.chester095.nasa.R
@@ -18,7 +17,6 @@ import com.chester095.nasa.view.MainActivity
 import com.chester095.nasa.view.settings.SettingsFragment
 import com.chester095.nasa.viewmodel.PictureOfTheDayData
 import com.chester095.nasa.viewmodel.PictureOfTheDayViewModel
-import com.chester095.nasa.view.main.BottomNavigationDrawerFragment
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
@@ -50,7 +48,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getData().observe(viewLifecycleOwner, Observer {
+        viewModel.getData().observe(viewLifecycleOwner, {
             renderData(it)
         })
         viewModel.sendRequest()
@@ -94,17 +92,20 @@ class MainFragment : Fragment() {
         (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
         setHasOptionsMenu(true)
 
-        binding.fab.setOnClickListener{
-            if(isMain){
+        val behavior = BottomSheetBehavior.from(binding.included.bottomSheetContainer)
+        binding.fab.setOnClickListener {
+            if (isMain) {
+                behavior.state = BottomSheetBehavior.STATE_EXPANDED
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                binding.fab.setImageResource(R.drawable.ic_back_fab)
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
-            }else{
-                binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_hamburger_menu_bottom_bar)
+                binding.fab.setImageResource(R.drawable.ic_back_fab)
+            } else {
+                behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_hamburger_menu_bottom_bar)
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                binding.fab.setImageResource(R.drawable.ic_plus_fab)
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
+                binding.fab.setImageResource(R.drawable.ic_plus_fab)
             }
             isMain = !isMain
         }
@@ -145,7 +146,7 @@ class MainFragment : Fragment() {
                     .replace(R.id.container, SettingsFragment.newInstance()).addToBackStack("").commit()
             }
             android.R.id.home -> {
-                BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager,"ff")
+                BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "ff")
             }
         }
         return super.onOptionsItemSelected(item)
