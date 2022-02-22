@@ -5,14 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.chester095.nasa.R
 import com.chester095.nasa.databinding.BottomNavigationLayoutBinding
-import com.chester095.nasa.databinding.FragmentMainBinding
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.chester095.nasa.view.StylesFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomNavigationDrawerFragment:BottomSheetDialogFragment() {
+class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
     private var _binding: BottomNavigationLayoutBinding? = null
     val binding: BottomNavigationLayoutBinding
@@ -28,10 +26,16 @@ class BottomNavigationDrawerFragment:BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.navigationView.setNavigationItemSelectedListener { menu->
-            when(menu.itemId){
+        binding.navigationView.setNavigationItemSelectedListener { menu ->
+            when (menu.itemId) {
+                R.id.navigation_style -> {
+                    hideBottomNav()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, StylesFragment.newInstance()).addToBackStack("").commit()
+                }
                 R.id.navigation_one -> {
                     Toast.makeText(requireContext(), "navigation_one", Toast.LENGTH_SHORT).show()
+                    hideBottomNav()
                 }
                 R.id.navigation_two -> {
                     Toast.makeText(requireContext(), "navigation_two", Toast.LENGTH_SHORT).show()
@@ -39,5 +43,10 @@ class BottomNavigationDrawerFragment:BottomSheetDialogFragment() {
             }
             true
         }
+    }
+
+    private fun hideBottomNav() {
+        binding.navigationView.visibility = View.GONE
+
     }
 }

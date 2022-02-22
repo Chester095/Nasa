@@ -3,4 +3,8 @@
     <attr name="nasaBackgroundColor" format="color"/>
     <attr name="nasaPrimaryColor" format="color"/>
     <attr name="nasaPrimaryDarkColor" format="color"/>
+    <attr name="colorOnSurfaceVariant" format="color"/>
+    <attr name="colorOnSurface" format="color"/>
+
+
 </resources>

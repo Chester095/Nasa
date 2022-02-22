@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // SP
-        setTheme(R.style.MyThemeBlueGray)
+        setTheme(R.style.MyThemeIndigo)
         setContentView(R.layout.activity_main)
 
         TextView(this).apply {

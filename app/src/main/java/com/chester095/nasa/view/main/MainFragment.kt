@@ -48,9 +48,9 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getData().observe(viewLifecycleOwner, {
+        viewModel.getData().observe(viewLifecycleOwner) {
             renderData(it)
-        })
+        }
         viewModel.sendRequest()
 
         binding.inputLayout.setEndIconOnClickListener {
