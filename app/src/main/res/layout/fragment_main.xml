@@ -35,6 +35,31 @@
                 android:textAppearance="@style/MyTextAppearanceHeadline1" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputLayout"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/yesterday"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chip_yesterday" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/today"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chip_today" />
+
+        </com.google.android.material.chip.ChipGroup>
+
         <com.chester095.nasa.utils.EquilateralImageView
             android:id="@+id/image_view"
             android:layout_width="match_parent"
