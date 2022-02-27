@@ -1,10 +1,13 @@
 package com.chester095.nasa.view
 
 import android.content.Context
+import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.chester095.nasa.R
@@ -41,8 +44,8 @@ class StylesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-/*        initTheme()
-        initThemeListener()*/
+        initTheme()
+        initThemeListener()
         initBtnStyle()
     }
 
@@ -72,7 +75,7 @@ class StylesFragment : Fragment() {
         }
     }
 
-/*    private fun initTheme() {
+    private fun initTheme() {
         when {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB -> {
                 binding.themeSystem.visibility = View.VISIBLE
@@ -114,5 +117,5 @@ class StylesFragment : Fragment() {
     }
 
     private fun saveTheme(theme: Int) = parentActivity.sharedPrefs.edit().putInt(KEY_THEME, theme).apply()
-    private fun getSavedTheme() = parentActivity.sharedPrefs.getInt(KEY_THEME, THEME_UNDEFINED)*/
+    private fun getSavedTheme() = parentActivity.sharedPrefs.getInt(KEY_THEME, THEME_UNDEFINED)
 }

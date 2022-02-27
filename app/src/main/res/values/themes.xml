@@ -24,7 +24,6 @@
         <item name="nasaPrimaryDarkColor">@color/black</item>
         <item name="bottomAppBarStyle">@style/myBottomAppBarStyleBlackBlue</item>
         <item name="floatingActionButtonStyle">@style/myFloatingActionButtonStyleOrange</item>
-
         <item name="useMaterialThemeColors">false</item>
     </style>
 

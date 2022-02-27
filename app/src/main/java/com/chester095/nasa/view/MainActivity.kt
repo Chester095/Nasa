@@ -21,10 +21,11 @@ const val THEME_SYSTEM = 2
 
 class MainActivity : AppCompatActivity() {
 
+    val sharedPrefs: SharedPreferences by lazy {  getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(getCurrentTheme())
-        Log.d("!!!", ""+getCurrentTheme())
         setContentView(R.layout.activity_main)
 
 
