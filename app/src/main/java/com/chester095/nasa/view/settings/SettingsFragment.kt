@@ -62,6 +62,21 @@ class SettingsFragment : Fragment() {
         })
     }
 
+/*
+    binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+        when(checkedId){
+            R.id.yestrday ->{viewModel.sendServerRequest(takeDate(-1))}
+            R.id.today ->{viewModel.sendServerRequest()}
+        }
+    }
+
+    private fun takeDate(count: Int): String {
+        val currentDate = Calendar.getInstance()
+        currentDate.add(Calendar.DAY_OF_MONTH, count)
+        val format1 = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        format1.timeZone = TimeZone.getTimeZone("EST")
+        return format1.format(currentDate.time)
+    }*/
 
     companion object {
         @JvmStatic

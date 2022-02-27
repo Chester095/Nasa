@@ -19,6 +19,8 @@ import com.chester095.nasa.viewmodel.PictureOfTheDayData
 import com.chester095.nasa.viewmodel.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MainFragment : Fragment() {
@@ -51,13 +53,24 @@ class MainFragment : Fragment() {
         viewModel.getData().observe(viewLifecycleOwner) {
             renderData(it)
         }
-        viewModel.sendRequest()
+        viewModel.sendServerRequest()
 
         binding.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 data =
                     Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
             })
+        }
+
+        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.yesterday -> {
+                    viewModel.sendServerRequest(takeDate(-1))
+                }
+                R.id.today -> {
+                    viewModel.sendServerRequest()
+                }
+            }
         }
 
         bottomSheetBehavior = BottomSheetBehavior.from(binding.included.bottomSheetContainer)
@@ -134,6 +147,14 @@ class MainFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_bottom_bar, menu)
+    }
+
+    private fun takeDate(count: Int): String {
+        val currentDate = Calendar.getInstance()
+        currentDate.add(Calendar.DAY_OF_MONTH, count)
+        val format1 = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        format1.timeZone = TimeZone.getTimeZone("EST")
+        return format1.format(currentDate.time)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
