@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
 
-    <style name="MyOrange" parent="MyBaseTheme">
+    <style name="MyThemeOrange" parent="MyBaseTheme">
         <item name="nasaBackgroundColor">@color/yellow_900</item>
         <item name="nasaPrimaryColor">@color/yellow_50</item>
         <item name="nasaPrimaryDarkColor">@color/black</item>

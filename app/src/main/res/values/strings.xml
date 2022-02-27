@@ -20,5 +20,11 @@
     <string name="styles_tab_item_orange">Orange</string>
     <string name="styles_tab_item_blue_gray">BlueGray</string>
     <string name="styles_tab_item_indigo">Indigo</string>
+    <string name="theme_title">Themes:</string>
+    <string name="rb_light_theme">Тёмная тема</string>
+    <string name="rb_dark_theme">Светлая тема</string>
+    <string name="rb_system_theme">Системная тема</string>
+    <string name="chip_today">Сегодня</string>
+    <string name="chip_yesterday">Вчера</string>
 
 </resources>

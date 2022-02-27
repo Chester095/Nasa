@@ -57,14 +57,17 @@
             android:gravity="center">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOrange"
                 style="@style/myMaterialButtonStyleOrange"
                 android:text="@string/styles_tab_item_orange" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBlueGray"
                 style="@style/myMaterialButtonStyleBlueGray"
                 android:text="@string/styles_tab_item_blue_gray" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnIndigo"
                 style="@style/myMaterialButtonStyleIndigo"
                 android:text="@string/styles_tab_item_indigo" />
         </LinearLayout>
