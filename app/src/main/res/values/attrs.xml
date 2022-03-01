@@ -4,6 +4,8 @@
     <attr name="nasaPrimaryColor" format="color"/>
     <attr name="nasaPrimaryDarkColor" format="color"/>
     <attr name="colorOnSurface" format="color"/>
+    <attr name="swipeIndicatorActive" format="color"/>
+    <attr name="swipeIndicatorPassive" format="color"/>
 
 
 </resources>

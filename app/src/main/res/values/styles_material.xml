@@ -93,6 +93,7 @@
 
     <style name="myBottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="backgroundTint">?attr/nasaBackgroundColor</item>
+        <item name="itemIconTint">?attr/swipeIndicatorActive</item>
         <item name="iconTint">?attr/nasaPrimaryColor</item>
     </style>
 

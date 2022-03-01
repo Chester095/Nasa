@@ -8,10 +8,10 @@
         <item
             android:id="@+id/navigation_one"
             android:icon="@drawable/ic_archive"
-            android:title="@string/navigation_one_title" />
+            android:title="@string/api_activity" />
         <item
             android:id="@+id/navigation_two"
             android:icon="@drawable/ic_send"
-            android:title="@string/navigation_two_title" />
+            android:title="@string/api_bottom_activity" />
     </group>
 </menu>

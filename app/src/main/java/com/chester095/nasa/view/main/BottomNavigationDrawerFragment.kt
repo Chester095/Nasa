@@ -1,13 +1,15 @@
 package com.chester095.nasa.view.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.chester095.nasa.R
 import com.chester095.nasa.databinding.BottomNavigationLayoutBinding
 import com.chester095.nasa.view.StylesFragment
+import com.chester095.nasa.view.bottomnavigation.ApiBottomActivity
+import com.chester095.nasa.view.viewpager.ApiActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
@@ -34,11 +36,10 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
                         .replace(R.id.container, StylesFragment.newInstance()).addToBackStack("").commit()
                 }
                 R.id.navigation_one -> {
-                    Toast.makeText(requireContext(), "navigation_one", Toast.LENGTH_SHORT).show()
-                    hideBottomNav()
+                    startActivity(Intent(requireContext(), ApiActivity::class.java))
                 }
                 R.id.navigation_two -> {
-                    Toast.makeText(requireContext(), "navigation_two", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(requireContext(), ApiBottomActivity::class.java))
                 }
             }
             true
