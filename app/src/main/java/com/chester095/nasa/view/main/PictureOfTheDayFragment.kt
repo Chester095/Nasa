@@ -1,13 +1,11 @@
 package com.chester095.nasa.view.main
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -23,8 +21,6 @@ import com.chester095.nasa.viewmodel.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class PictureOfTheDayFragment : Fragment() {
@@ -36,15 +32,25 @@ class PictureOfTheDayFragment : Fragment() {
             return _binding!!
         }
 
+    private val viewModel: PictureOfTheDayViewModel by lazy {
+        ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
+    }
+
     lateinit var pictureOfTheDayViewModel: PictureOfTheDayViewModel
+
+    companion object {
+        fun newInstance(): PictureOfTheDayFragment {
+            return PictureOfTheDayFragment()
+        }
+
+        private const val TODAY = 0
+        private const val YESTERDAY = 1
+        private const val BEFORE_YESTERDAY = 2
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         pictureOfTheDayViewModel = (context as MainActivity).pictureOfTheDayViewModel
-    }
-
-    private val viewModel: PictureOfTheDayViewModel by lazy {
-        ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -101,14 +107,14 @@ class PictureOfTheDayFragment : Fragment() {
             }
 
             bottomSheetBehavior = BottomSheetBehavior.from(binding.included.bottomSheetContainer)
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
 
             bottomSheetBehavior.addBottomSheetCallback(object :
                 BottomSheetBehavior.BottomSheetCallback() {
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
                     when (newState) {
-                        BottomSheetBehavior.STATE_DRAGGING ->
+/*                        BottomSheetBehavior.STATE_DRAGGING ->
                             Toast.makeText(requireContext(), "STATE_DRAGGING", Toast.LENGTH_SHORT).show()
                         BottomSheetBehavior.STATE_COLLAPSED ->
                             Toast.makeText(requireContext(), "STATE_COLLAPSED", Toast.LENGTH_SHORT).show()
@@ -119,7 +125,7 @@ class PictureOfTheDayFragment : Fragment() {
                         BottomSheetBehavior.STATE_HIDDEN ->
                             Toast.makeText(requireContext(), "STATE_HIDDEN", Toast.LENGTH_SHORT).show()
                         BottomSheetBehavior.STATE_SETTLING ->
-                            Toast.makeText(requireContext(), "STATE_SETTLING", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "STATE_SETTLING", Toast.LENGTH_SHORT).show()*/
                     }
                 }
 
@@ -153,34 +159,27 @@ class PictureOfTheDayFragment : Fragment() {
         }
 
 
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_bottom_bar, menu)
+    }
 
-/*        override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-            super.onCreateOptionsMenu(menu, inflater)
-            inflater.inflate(R.menu.menu_bottom_bar, menu)
-        }
-
-
-        override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            when (item.itemId) {
-                R.id.app_bar_fav -> {
-                    Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT).show()
-                }
-                R.id.app_bar_settings -> {
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, SettingsFragment.newInstance()).addToBackStack("").commit()
-                }
-                android.R.id.home -> {
-                    BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "ff")
-                }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.app_bar_fav -> {
+//                    Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT).show()
             }
-            return super.onOptionsItemSelected(item)
+            R.id.app_bar_settings -> {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, SettingsFragment.newInstance()).addToBackStack("").commit()
+            }
+            android.R.id.home -> {
+                BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "ff")
+            }
         }
-
-        companion object {
-            @JvmStatic
-            fun newInstance() = PictureOfTheDayFragment()
-        }*/
+        return super.onOptionsItemSelected(item)
     }
 
     private fun showAVideoUrl(videoUrl: String) = with(binding) {
@@ -240,13 +239,4 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
-    companion object {
-        fun newInstance(): PictureOfTheDayFragment {
-            return PictureOfTheDayFragment()
-        }
-
-        private const val TODAY = 0
-        private const val YESTERDAY = 1
-        private const val BEFORE_YESTERDAY = 2
-    }
 }
