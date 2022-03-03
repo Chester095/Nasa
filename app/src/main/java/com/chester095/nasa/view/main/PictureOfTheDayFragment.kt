@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -200,13 +201,13 @@ class PictureOfTheDayFragment : Fragment() {
             is AppState.Error ->
                 Snackbar.make(binding.root, appState.error.toString(), Snackbar.LENGTH_SHORT).show()
             is AppState.Loading -> {
+                Toast.makeText(requireContext(), "Грузится...", Toast.LENGTH_SHORT).show()
                 binding.imageView.load(R.drawable.progress_animation)
             }
             is AppState.SuccessPOD -> {
                 setData(appState)
             }
             is AppState.SuccessEarthEpic -> {
-                // немного магии датамайнинга
                 val strDate = appState.serverResponseData.last().date.split(" ").first()
                 val image = appState.serverResponseData.last().image
                 val url = "https://api.nasa.gov/EPIC/archive/natural/" +
@@ -214,6 +215,7 @@ class PictureOfTheDayFragment : Fragment() {
                         "/png/" +
                         "$image" +
                         ".png?api_key=${BuildConfig.NASA_API_KEY}"
+                BottomSheetBehavior.from(binding.included.bottomSheetContainer).state = BottomSheetBehavior.STATE_HIDDEN
                 binding.imageView.load(url)
             }
             is AppState.SuccessMars -> {
@@ -221,6 +223,7 @@ class PictureOfTheDayFragment : Fragment() {
                     Snackbar.make(binding.root, "В этот день curiosity не сделал ни одного снимка", Snackbar.LENGTH_SHORT).show()
                 } else {
                     val url = appState.serverResponseData.photos.first().imgSrc
+                    BottomSheetBehavior.from(binding.included.bottomSheetContainer).state = BottomSheetBehavior.STATE_HIDDEN
                     binding.imageView.load(url)
                 }
 
@@ -235,7 +238,10 @@ class PictureOfTheDayFragment : Fragment() {
             val videoUrl = data.serverResponseData.url
             videoUrl?.let { showAVideoUrl(it) }
         } else {
+            BottomSheetBehavior.from(binding.included.bottomSheetContainer).state = BottomSheetBehavior.STATE_COLLAPSED
             binding.imageView.load(url)
+            binding.included.bottomSheetDescriptionHeader.text = data.serverResponseData.title
+            binding.included.bottomSheetDescription.text = data.serverResponseData.explanation
         }
     }
 
