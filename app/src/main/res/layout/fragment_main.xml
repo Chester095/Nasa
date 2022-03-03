@@ -23,7 +23,7 @@
             app:endIconDrawable="@drawable/ic_wikipedia"
             app:endIconMode="custom"
             app:helperText="@string/wiki_helper_text"
-            app:layout_constraintBottom_toTopOf="@+id/chipGroup"
+            app:layout_constraintBottom_toTopOf="@+id/chips_Group"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -37,7 +37,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup"
+            android:id="@+id/chips_Group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/image_view"
@@ -47,18 +47,39 @@
             app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/yesterday"
+                android:id="@+id/chipYesterday"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/chip_yesterday" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/today"
+                android:id="@+id/chipToday"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/chip_today" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipDayBeforeYesterday"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chip_day_before_yesterday" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipEarthToday"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chip_earth_today" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipMarsToday"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chip_mars_today" />
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -74,6 +95,13 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_no_photo_vector" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/videoOfTheDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/purple_700"
+        android:textStyle="bold"/>
 
 
     <include

@@ -37,8 +37,8 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
-            binding.chipGroup.findViewById<Chip>(checkedId)?.let { it ->
+        binding.chipsGroup.setOnCheckedChangeListener { group, checkedId ->
+            binding.chipsGroup.findViewById<Chip>(checkedId)?.let { it ->
                 Toast.makeText(requireContext(), "${it.text} ${checkedId}", Toast.LENGTH_SHORT).show()
             }
         }

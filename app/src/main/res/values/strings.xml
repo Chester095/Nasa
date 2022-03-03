@@ -121,5 +121,8 @@
     <string name="earth">Earth</string>
     <string name="mars">Mars</string>
     <string name="system">System</string>
+    <string name="chip_day_before_yesterday">Позавчера</string>
+    <string name="chip_earth_today">Земля сегодня</string>
+    <string name="chip_mars_today">Марс сегодня</string>
 
 </resources>

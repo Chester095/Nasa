@@ -1,8 +1,8 @@
-package com.chester095.nasa.repository
+package com.chester095.nasa.repository.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class PDOServerResponse (
+data class PODServerResponseData (
     @field:SerializedName("copyright") val copyright: String?,
     @field:SerializedName("date") val date: String?,
     @field:SerializedName("explanation") val explanation: String?,

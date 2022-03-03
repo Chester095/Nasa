@@ -4,8 +4,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.chester095.nasa.R
-import com.chester095.nasa.view.main.MainFragment
+import com.chester095.nasa.view.main.PictureOfTheDayFragment
+import com.chester095.nasa.viewmodel.PictureOfTheDayViewModel
 
 const val PREFS_NAME = "theme_prefs"
 const val KEY_THEME = "prefs.theme"
@@ -18,6 +20,10 @@ const val THEME_SYSTEM = 2
 
 class MainActivity : AppCompatActivity() {
 
+    val pictureOfTheDayViewModel by lazy {
+        ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
+    }
+
     val sharedPrefs: SharedPreferences by lazy {  getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         if(savedInstanceState==null){
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container,MainFragment.newInstance()).commit()
+                .replace(R.id.container,PictureOfTheDayFragment.newInstance()).commit()
         }
     }
 
