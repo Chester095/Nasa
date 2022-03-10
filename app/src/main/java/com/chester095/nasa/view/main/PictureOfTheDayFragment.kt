@@ -1,5 +1,6 @@
 package com.chester095.nasa.view.main
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -22,7 +23,6 @@ import com.chester095.nasa.viewmodel.PictureOfTheDayViewModel
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
-
 
 class PictureOfTheDayFragment : Fragment() {
 
@@ -85,12 +85,10 @@ class PictureOfTheDayFragment : Fragment() {
                 R.id.chipToday -> {
                     binding.chipsGroup.check(R.id.chipToday)
                     viewModel.getPODFromServer((TODAY))
-
                 }
                 R.id.chipYesterday -> {
                     binding.chipsGroup.check(R.id.chipYesterday)
                     viewModel.getPODFromServer((YESTERDAY))
-
                 }
                 R.id.chipDayBeforeYesterday -> {
                     binding.chipsGroup.check(R.id.chipDayBeforeYesterday)
@@ -133,7 +131,6 @@ class PictureOfTheDayFragment : Fragment() {
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
                     Log.d("mylogs", "slideOffset $slideOffset")
                 }
-
             })
 
             (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
@@ -174,7 +171,8 @@ class PictureOfTheDayFragment : Fragment() {
             }
             R.id.app_bar_settings -> {
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, SettingsFragment.newInstance()).addToBackStack("").commit()
+                    .replace(R.id.container, SettingsFragment.newInstance())
+                    .addToBackStack("").commit()
             }
             android.R.id.home -> {
                 BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "ff")
@@ -183,11 +181,12 @@ class PictureOfTheDayFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showAVideoUrl(videoUrl: String) = with(binding) {
         imageView.visibility = View.GONE
         videoOfTheDay.visibility = View.VISIBLE
         videoOfTheDay.text = "Сегодня у нас без картинки дня, но есть  видео дня! " +
-                "${videoUrl.toString()} \n кликни >ЗДЕСЬ< чтобы открыть в новом окне"
+                "$videoUrl \n кликни >ЗДЕСЬ< чтобы открыть в новом окне"
         videoOfTheDay.setOnClickListener {
             val i = Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(videoUrl)
