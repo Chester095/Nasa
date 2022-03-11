@@ -9,16 +9,15 @@
         android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="guideline1,btn_orange, btn_indigo, btn_blue_gray"
         android:visibility="visible"
-        />
+        app:constraint_referenced_ids="guideline1,btn_orange, btn_indigo, btn_blue_gray" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15"/>
+        app:layout_constraintGuide_percent="0.15" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_orange"
@@ -52,8 +51,8 @@
         android:id="@+id/themeGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
         android:paddingLeft="16dp"
+        android:paddingTop="16dp"
         android:paddingRight="16dp"
         android:paddingBottom="16dp"
         app:layout_constraintStart_toStartOf="parent"
