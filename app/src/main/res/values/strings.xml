@@ -14,7 +14,7 @@
     <string name="chip_choice">Chip choice</string>
     <string name="chip_action">Chip action</string>
     <string name="chip_filter">Chip filter</string>
-    <string name="loading">loading...</string>
+    <string name="loading">loading&#8230;</string>
     <string name="tab_layout_default">Default</string>
     <string name="navigation_choose_style">Выбор стиля</string>
     <string name="styles_tab_item_orange">Orange</string>
@@ -124,5 +124,6 @@
     <string name="chip_day_before_yesterday">Позавчера</string>
     <string name="chip_earth_today">Земля сегодня</string>
     <string name="chip_mars_today">Марс сегодня</string>
+    <string name="choose_theme">Выберите тему</string>
 
 </resources>

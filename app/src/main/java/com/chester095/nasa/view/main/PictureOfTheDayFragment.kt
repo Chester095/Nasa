@@ -112,8 +112,8 @@ class PictureOfTheDayFragment : Fragment() {
             bottomSheetBehavior.addBottomSheetCallback(object :
                 BottomSheetBehavior.BottomSheetCallback() {
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
-                    when (newState) {
-/*                        BottomSheetBehavior.STATE_DRAGGING ->
+/*                    when (newState) {
+*//*                        BottomSheetBehavior.STATE_DRAGGING ->
                             Toast.makeText(requireContext(), "STATE_DRAGGING", Toast.LENGTH_SHORT).show()
                         BottomSheetBehavior.STATE_COLLAPSED ->
                             Toast.makeText(requireContext(), "STATE_COLLAPSED", Toast.LENGTH_SHORT).show()
@@ -124,8 +124,8 @@ class PictureOfTheDayFragment : Fragment() {
                         BottomSheetBehavior.STATE_HIDDEN ->
                             Toast.makeText(requireContext(), "STATE_HIDDEN", Toast.LENGTH_SHORT).show()
                         BottomSheetBehavior.STATE_SETTLING ->
-                            Toast.makeText(requireContext(), "STATE_SETTLING", Toast.LENGTH_SHORT).show()*/
-                    }
+                            Toast.makeText(requireContext(), "STATE_SETTLING", Toast.LENGTH_SHORT).show()*//*
+                    }*/
                 }
 
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -213,11 +213,8 @@ class PictureOfTheDayFragment : Fragment() {
             is AppState.SuccessEarthEpic -> {
                 val strDate = appState.serverResponseData.last().date.split(" ").first()
                 val image = appState.serverResponseData.last().image
-                val url = "https://api.nasa.gov/EPIC/archive/natural/" +
-                        strDate.replace("-", "/", true) +
-                        "/png/" +
-                        "$image" +
-                        ".png?api_key=${BuildConfig.NASA_API_KEY}"
+                val url = "https://api.nasa.gov/EPIC/archive/natural/${strDate.replace("-", "/", true)}/png/" +
+                        "$image.png?api_key=${BuildConfig.NASA_API_KEY}"
                 BottomSheetBehavior.from(binding.included.bottomSheetContainer).state = BottomSheetBehavior.STATE_HIDDEN
                 binding.imageView.load(url)
             }
