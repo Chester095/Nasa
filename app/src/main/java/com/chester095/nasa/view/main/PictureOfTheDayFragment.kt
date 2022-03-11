@@ -133,28 +133,32 @@ class PictureOfTheDayFragment : Fragment() {
                 }
             })
 
-            (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
-            setHasOptionsMenu(true)
 
-            val behavior = BottomSheetBehavior.from(binding.included.bottomSheetContainer)
-            var isMain = true
-            binding.fab.setOnClickListener {
-                if (isMain) {
-                    behavior.state = BottomSheetBehavior.STATE_EXPANDED
-                    binding.bottomAppBar.navigationIcon = null
-                    binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                    binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
-                    binding.fab.setImageResource(R.drawable.ic_back_fab)
-                } else {
-                    behavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                    binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_hamburger_menu_bottom_bar)
-                    binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                    binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
-                    binding.fab.setImageResource(R.drawable.ic_plus_fab)
-                }
-                isMain = !isMain
-            }
         }
+
+        (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
+        setHasOptionsMenu(true)
+
+        val behavior = BottomSheetBehavior.from(binding.included.bottomSheetContainer)
+        var isMain = true
+        binding.fab.setOnClickListener {
+            Log.d("!!!!", "   isMain = "+isMain)
+            if (isMain) {
+                behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                binding.bottomAppBar.navigationIcon = null
+                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
+                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
+                binding.fab.setImageResource(R.drawable.ic_back_fab)
+            } else {
+                behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_hamburger_menu_bottom_bar)
+                binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
+                binding.fab.setImageResource(R.drawable.ic_plus_fab)
+            }
+            isMain = !isMain
+        }
+
 
 
     }
