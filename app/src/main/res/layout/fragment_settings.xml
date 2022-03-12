@@ -159,20 +159,21 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:text="@string/button" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardView"
-                android:layout_margin="20dp"
-                app:cardElevation="20dp"
-
                 android:layout_width="match_parent"
-                android:layout_height="100dp"/>
+                android:layout_height="100dp"
+
+                android:layout_margin="20dp"
+                app:cardElevation="20dp" />
 
 
         </LinearLayout>
@@ -180,13 +181,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:gravity="bottom">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigationView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:menu="@menu/menu_bottom_navigation"/>
+                android:gravity="bottom"
+                app:menu="@menu/menu_bottom_navigation" />
 
         </LinearLayout>
 

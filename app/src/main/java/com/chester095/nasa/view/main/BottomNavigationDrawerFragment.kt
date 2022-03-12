@@ -9,13 +9,14 @@ import com.chester095.nasa.R
 import com.chester095.nasa.databinding.BottomNavigationLayoutBinding
 import com.chester095.nasa.view.StylesFragment
 import com.chester095.nasa.view.bottomnavigation.ApiBottomActivity
+import com.chester095.nasa.view.coordinator.CoordinatorFragment
 import com.chester095.nasa.view.viewpager.ApiActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
     private var _binding: BottomNavigationLayoutBinding? = null
-    val binding: BottomNavigationLayoutBinding
+    private val binding: BottomNavigationLayoutBinding
         get() = _binding!!
 
     override fun onCreateView(
@@ -35,6 +36,11 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
                     requireActivity().supportFragmentManager.beginTransaction()
                         .replace(R.id.container, StylesFragment.newInstance()).addToBackStack("").commit()
                 }
+                R.id.navigation_coordinator -> {
+                    hideBottomNav()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, CoordinatorFragment.newInstance()).addToBackStack("").commit()
+                }
                 R.id.navigation_one -> {
                     startActivity(Intent(requireContext(), ApiActivity::class.java))
                 }
@@ -48,6 +54,7 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
     private fun hideBottomNav() {
         binding.navigationView.visibility = View.GONE
+        binding.navigationView.descendantFocusability
 
     }
 }

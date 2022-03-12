@@ -26,7 +26,7 @@ import com.google.android.material.snackbar.Snackbar
 
 class PictureOfTheDayFragment : Fragment() {
 
-    lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private var _binding: FragmentMainBinding? = null
     private val binding: FragmentMainBinding
         get() {
@@ -37,7 +37,7 @@ class PictureOfTheDayFragment : Fragment() {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
     }
 
-    lateinit var pictureOfTheDayViewModel: PictureOfTheDayViewModel
+    private lateinit var pictureOfTheDayViewModel: PictureOfTheDayViewModel
 
     companion object {
         fun newInstance(): PictureOfTheDayFragment {
@@ -142,7 +142,6 @@ class PictureOfTheDayFragment : Fragment() {
         val behavior = BottomSheetBehavior.from(binding.included.bottomSheetContainer)
         var isMain = true
         binding.fab.setOnClickListener {
-            Log.d("!!!!", "   isMain = "+isMain)
             if (isMain) {
                 behavior.state = BottomSheetBehavior.STATE_EXPANDED
                 binding.bottomAppBar.navigationIcon = null

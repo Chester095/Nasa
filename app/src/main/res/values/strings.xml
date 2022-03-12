@@ -125,5 +125,7 @@
     <string name="chip_earth_today">Земля сегодня</string>
     <string name="chip_mars_today">Марс сегодня</string>
     <string name="choose_theme">Выберите тему</string>
+    <string name="navigation_coordinator">Coordinator</string>
+    <string name="button">Button</string>
 
 </resources>
