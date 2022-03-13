@@ -55,12 +55,13 @@ class StylesFragment : Fragment() {
         initText()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
     private fun initText() {
+        val paramsButton = binding.btnOrange.layoutParams as ConstraintLayout.LayoutParams
+        paramsButton.bottomToTop = binding.text.id
+        paramsButton.endToStart = ConstraintSet.PARENT_ID
+        paramsButton.topToTop = ConstraintSet.PARENT_ID
+        binding.btnOrange.requestLayout()
+
         val autoTransition = AutoTransition()
         autoTransition.duration = 5000
         TransitionManager.beginDelayedTransition(binding.transitionsContainer, autoTransition)
@@ -70,6 +71,11 @@ class StylesFragment : Fragment() {
         params.endToEnd = binding.btnOrange.id
         params.startToStart = binding.btnOrange.id
         params.topToBottom = binding.btnOrange.id
+        paramsButton.bottomToTop = binding.text.id
+        paramsButton.endToStart = binding.btnIndigo.id
+        paramsButton.startToStart = ConstraintSet.PARENT_ID
+        paramsButton.topToTop = ConstraintSet.PARENT_ID
+        binding.btnOrange.requestLayout()
 
         if (parentActivity.getCurrentTheme() == R.style.MyThemeOrange) {
             val params = binding.text.layoutParams as ConstraintLayout.LayoutParams
@@ -179,5 +185,11 @@ class StylesFragment : Fragment() {
     }
 
     private fun saveTheme(theme: Int) = parentActivity.sharedPrefs.edit().putInt(KEY_THEME, theme).apply()
+
     private fun getSavedTheme() = parentActivity.sharedPrefs.getInt(KEY_THEME, THEME_UNDEFINED)
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }
