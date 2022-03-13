@@ -128,5 +128,6 @@
     <string name="navigation_coordinator">Coordinator</string>
     <string name="button">Button</string>
     <string name="navigation_animation">Animation</string>
+    <string name="choose">Выбрана</string>
 
 </resources>

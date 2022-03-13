@@ -8,11 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.res.ResourcesCompat
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
+import androidx.transition.AutoTransition
+import androidx.transition.TransitionManager
 import com.chester095.nasa.R
 import com.chester095.nasa.databinding.FragmentStylesBinding
-import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.delay
 
 
 class StylesFragment : Fragment() {
@@ -21,6 +24,8 @@ class StylesFragment : Fragment() {
         @JvmStatic
         fun newInstance() = StylesFragment()
     }
+
+    private var textISVisible = false
     private var _binding: FragmentStylesBinding? = null
 
     val binding: FragmentStylesBinding
@@ -47,6 +52,7 @@ class StylesFragment : Fragment() {
         initTheme()
         initThemeListener()
         initBtnStyle()
+        initText()
     }
 
     override fun onDestroy() {
@@ -54,11 +60,67 @@ class StylesFragment : Fragment() {
         _binding = null
     }
 
+    private fun initText() {
+        val autoTransition = AutoTransition()
+        autoTransition.duration = 5000
+        TransitionManager.beginDelayedTransition(binding.transitionsContainer, autoTransition)
+        textISVisible = !textISVisible
+        binding.text.visibility = if (textISVisible) View.VISIBLE else View.GONE
+        val params = binding.text.layoutParams as ConstraintLayout.LayoutParams
+        params.endToEnd = binding.btnOrange.id
+        params.startToStart = binding.btnOrange.id
+        params.topToBottom = binding.btnOrange.id
+
+        if (parentActivity.getCurrentTheme() == R.style.MyThemeOrange) {
+            val params = binding.text.layoutParams as ConstraintLayout.LayoutParams
+            params.endToEnd = binding.btnOrange.id
+            params.startToStart = binding.btnOrange.id
+            params.topToBottom = binding.btnOrange.id
+
+            val autoTransition = AutoTransition()
+            autoTransition.duration = 5000
+            TransitionManager.beginDelayedTransition(binding.transitionsContainer, autoTransition)
+            binding.text.requestLayout()
+            val paramsButton = binding.btnOrange.layoutParams as ConstraintLayout.LayoutParams
+            paramsButton.bottomToTop = binding.text.id
+            paramsButton.endToStart = binding.btnIndigo.id
+            paramsButton.startToStart = ConstraintSet.PARENT_ID
+            paramsButton.topToTop = ConstraintSet.PARENT_ID
+            binding.btnOrange.requestLayout()
+
+        }
+        if (parentActivity.getCurrentTheme() == R.style.MyThemeBlueGray) {
+            TransitionManager.beginDelayedTransition(binding.transitionsContainer)
+            val params = binding.text.layoutParams as ConstraintLayout.LayoutParams
+            params.endToEnd = binding.btnBlueGray.id
+            params.startToStart = binding.btnBlueGray.id
+            params.topToBottom = binding.btnBlueGray.id
+            binding.text.requestLayout()
+            val paramsButton = binding.btnBlueGray.layoutParams as ConstraintLayout.LayoutParams
+            paramsButton.bottomToTop = binding.text.id
+            binding.btnOrange.requestLayout()
+
+        }
+        if (parentActivity.getCurrentTheme() == R.style.MyThemeIndigo) {
+            TransitionManager.beginDelayedTransition(binding.transitionsContainer)
+            val params = binding.text.layoutParams as ConstraintLayout.LayoutParams
+            params.endToEnd = binding.btnIndigo.id
+            params.startToStart = binding.btnIndigo.id
+            params.topToBottom = binding.btnIndigo.id
+            binding.text.requestLayout()
+            val paramsButton = binding.btnIndigo.layoutParams as ConstraintLayout.LayoutParams
+            paramsButton.bottomToTop = binding.text.id
+            binding.btnOrange.requestLayout()
+
+        }
+    }
+
     private fun initBtnStyle() {
         binding.btnOrange.setOnClickListener {
             if (parentActivity.getCurrentTheme() != R.style.MyThemeOrange) {
                 parentActivity.setCurrentTheme(R.style.MyThemeOrange)
                 parentActivity.recreate()
+
             }
         }
         binding.btnBlueGray.setOnClickListener {
