@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.chester095.nasa.R
 import com.chester095.nasa.databinding.BottomNavigationLayoutBinding
 import com.chester095.nasa.view.StylesFragment
+import com.chester095.nasa.view.animations.AnimationsActivity
 import com.chester095.nasa.view.bottomnavigation.ApiBottomActivity
 import com.chester095.nasa.view.coordinator.CoordinatorFragment
 import com.chester095.nasa.view.viewpager.ApiActivity
@@ -31,6 +32,9 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.navigationView.setNavigationItemSelectedListener { menu ->
             when (menu.itemId) {
+                R.id.navigation_animation -> {
+                    startActivity(Intent(requireContext(), AnimationsActivity::class.java))
+                }
                 R.id.navigation_style -> {
                     hideBottomNav()
                     requireActivity().supportFragmentManager.beginTransaction()

@@ -127,5 +127,8 @@
     <string name="choose_theme">Выберите тему</string>
     <string name="navigation_coordinator">Coordinator</string>
     <string name="button">Button</string>
+    <string name="navigation_animation">Animation</string>
+    <string name="choose">Выбрана</string>
+    <string name="push_me">Нажми меня</string>
 
 </resources>

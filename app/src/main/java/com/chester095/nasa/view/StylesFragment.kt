@@ -4,15 +4,18 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.transition.ChangeBounds
+import androidx.transition.Fade
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import com.chester095.nasa.R
 import com.chester095.nasa.databinding.FragmentStylesBinding
-import com.google.android.material.tabs.TabLayout
 
 
 class StylesFragment : Fragment() {
@@ -21,6 +24,8 @@ class StylesFragment : Fragment() {
         @JvmStatic
         fun newInstance() = StylesFragment()
     }
+
+    private var textISVisible = false
     private var _binding: FragmentStylesBinding? = null
 
     val binding: FragmentStylesBinding
@@ -47,11 +52,35 @@ class StylesFragment : Fragment() {
         initTheme()
         initThemeListener()
         initBtnStyle()
+        initText()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
+    private fun initText() {
+
+        Handler(requireActivity().mainLooper).post {
+            val transitionSet = TransitionSet()
+            val fade = Fade()
+            val changeBounds = ChangeBounds()
+            fade.duration = 1000
+            changeBounds.duration = 1000
+            transitionSet.addTransition(fade)
+            transitionSet.ordering = TransitionSet.ORDERING_SEQUENTIAL
+            transitionSet.addTransition(changeBounds)
+            TransitionManager.beginDelayedTransition(binding.transitionsContainer, transitionSet)
+            binding.guideline1.setGuidelinePercent(0.15F)
+            binding.guideline2.setGuidelinePercent(0.15F)
+
+
+            if (parentActivity.getCurrentTheme() == R.style.MyThemeOrange) {
+                binding.textOrange.visibility = View.VISIBLE
+            }
+            if (parentActivity.getCurrentTheme() == R.style.MyThemeBlueGray) {
+                binding.textBlueGray.visibility = View.VISIBLE
+            }
+            if (parentActivity.getCurrentTheme() == R.style.MyThemeIndigo) {
+                binding.textIndigo.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun initBtnStyle() {
@@ -117,5 +146,11 @@ class StylesFragment : Fragment() {
     }
 
     private fun saveTheme(theme: Int) = parentActivity.sharedPrefs.edit().putInt(KEY_THEME, theme).apply()
+
     private fun getSavedTheme() = parentActivity.sharedPrefs.getInt(KEY_THEME, THEME_UNDEFINED)
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }

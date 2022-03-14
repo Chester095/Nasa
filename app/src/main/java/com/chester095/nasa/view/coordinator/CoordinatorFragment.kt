@@ -9,9 +9,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import com.chester095.nasa.R
 
-
 class CoordinatorFragment : Fragment() {
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

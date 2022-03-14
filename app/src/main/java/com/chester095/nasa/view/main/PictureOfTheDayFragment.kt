@@ -7,11 +7,15 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeImageTransform
+import androidx.transition.TransitionManager
 import coil.load
 import com.chester095.nasa.BuildConfig
 import com.chester095.nasa.R
@@ -44,6 +48,7 @@ class PictureOfTheDayFragment : Fragment() {
             return PictureOfTheDayFragment()
         }
 
+        private var flag = false
         private const val TODAY = 0
         private const val YESTERDAY = 1
         private const val BEFORE_YESTERDAY = 2
@@ -72,7 +77,6 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getLiveData().observe(viewLifecycleOwner) { renderData(it) }
-
         binding.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 if (binding.inputLayout.isEndIconCheckable) {
@@ -201,15 +205,19 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     private fun renderData(appState: AppState) {
+
         when (appState) {
             is AppState.Error ->
                 Snackbar.make(binding.root, appState.error.toString(), Snackbar.LENGTH_SHORT).show()
             is AppState.Loading -> {
                 Toast.makeText(requireContext(), "Грузится...", Toast.LENGTH_SHORT).show()
+                binding.imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
                 binding.imageView.load(R.drawable.progress_animation)
             }
             is AppState.SuccessPOD -> {
+                binding.imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
                 setData(appState)
+                zoomImage()
             }
             is AppState.SuccessEarthEpic -> {
                 val strDate = appState.serverResponseData.last().date.split(" ").first()
@@ -217,7 +225,9 @@ class PictureOfTheDayFragment : Fragment() {
                 val url = "https://api.nasa.gov/EPIC/archive/natural/${strDate.replace("-", "/", true)}/png/" +
                         "$image.png?api_key=${BuildConfig.NASA_API_KEY}"
                 BottomSheetBehavior.from(binding.included.bottomSheetContainer).state = BottomSheetBehavior.STATE_HIDDEN
+                binding.imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
                 binding.imageView.load(url)
+                zoomImage()
             }
             is AppState.SuccessMars -> {
                 if (appState.serverResponseData.photos.isEmpty()) {
@@ -225,11 +235,28 @@ class PictureOfTheDayFragment : Fragment() {
                 } else {
                     val url = appState.serverResponseData.photos.first().imgSrc
                     BottomSheetBehavior.from(binding.included.bottomSheetContainer).state = BottomSheetBehavior.STATE_HIDDEN
+                    binding.imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
                     binding.imageView.load(url)
+                    zoomImage()
                 }
-
             }
             else -> {}
+        }
+    }
+
+    private fun zoomImage(){
+        binding.imageView.setOnClickListener {
+            flag = !flag
+            val changeBounds = ChangeBounds()
+            val changeImageTransform = ChangeImageTransform()
+            changeBounds.duration = 3000
+            changeImageTransform.duration = 3000
+            TransitionManager.beginDelayedTransition(binding.main, changeImageTransform)
+            if (flag){
+                binding.imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+            } else {
+                binding.imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
+            }
         }
     }
 
