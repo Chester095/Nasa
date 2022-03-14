@@ -19,32 +19,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="-0.1" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_main"
-        android:visibility="visible"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/push_me"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="1" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_orange"
         style="@style/myMaterialButtonStyleOrange"
         android:text="@string/styles_tab_item_orange"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/text_orange"
+        app:layout_constraintEnd_toStartOf="@+id/btn_indigo"
 
-        app:layout_constraintBottom_toTopOf="@+id/guideline1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/text"
+        android:id="@+id/text_orange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/guideline1"
+        app:layout_constraintEnd_toEndOf="@+id/btn_orange"
+        app:layout_constraintStart_toStartOf="@+id/btn_orange"
+        app:layout_constraintTop_toBottomOf="@+id/btn_orange" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_indigo"
+        style="@style/myMaterialButtonStyleIndigo"
+        android:text="@string/styles_tab_item_indigo"
+        app:layout_constraintBottom_toTopOf="@+id/text_indigo"
+        app:layout_constraintEnd_toStartOf="@+id/btn_blue_gray"
+        app:layout_constraintStart_toEndOf="@+id/btn_orange"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_indigo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/choose"
@@ -52,28 +68,28 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline1"
         app:layout_constraintEnd_toEndOf="@+id/btn_indigo"
         app:layout_constraintStart_toStartOf="@+id/btn_indigo"
-        app:layout_constraintTop_toBottomOf="@+id/btn_orange" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_indigo" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_indigo"
-        style="@style/myMaterialButtonStyleIndigo"
-        android:text="@string/styles_tab_item_indigo"
-        app:layout_constraintStart_toEndOf="@+id/btn_orange"
-        app:layout_constraintEnd_toStartOf="@+id/btn_blue_gray"
-
-        app:layout_constraintBottom_toTopOf="@+id/guideline1"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_blue_gray"
         style="@style/myMaterialButtonStyleBlueGray"
         android:text="@string/styles_tab_item_blue_gray"
-        app:layout_constraintBottom_toTopOf="@+id/guideline1"
-
-        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/text_blue_gray"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_indigo"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_blue_gray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/guideline1"
+        app:layout_constraintEnd_toEndOf="@+id/btn_blue_gray"
+        app:layout_constraintStart_toStartOf="@+id/btn_blue_gray"
+        app:layout_constraintTop_toBottomOf="@+id/btn_blue_gray" />
 
     <RadioGroup
         android:id="@+id/themeGroup"
@@ -84,7 +100,7 @@
         android:paddingRight="16dp"
         android:paddingBottom="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline1">
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
 
         <RadioButton
             android:id="@+id/themeDark"
@@ -118,6 +134,7 @@
         app:constraint_referenced_ids="themeGroup" />
 
     <TextView
+        android:id="@+id/textView"
         style="@style/SecondaryText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -128,6 +145,6 @@
         app:layout_constraintBottom_toTopOf="@id/barrier2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/barrier1"
-        app:layout_constraintTop_toTopOf="@+id/guideline1" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

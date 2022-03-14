@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +12,10 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
-import androidx.transition.AutoTransition
-import androidx.transition.TransitionManager
+import androidx.transition.*
 import com.chester095.nasa.R
 import com.chester095.nasa.databinding.FragmentStylesBinding
+
 
 class StylesFragment : Fragment() {
 
@@ -50,94 +51,42 @@ class StylesFragment : Fragment() {
         initTheme()
         initThemeListener()
         initBtnStyle()
-        initMainBtn()
-    }
-
-    private fun initMainBtn() {
-        binding.btnMain.setOnClickListener {
-            val autoTransition = AutoTransition()
-            autoTransition.duration = 5000
-            TransitionManager.beginDelayedTransition(binding.transitionsContainer, autoTransition)
-            binding.btnMain.visibility = View.GONE
-            binding.btnMain.
-            binding.btnOrange.requestLayout()
-
-            initText()
-        }
+        initText()
     }
 
     private fun initText() {
-        if (parentActivity.getCurrentTheme() == R.style.MyThemeOrange) {
 
-            val autoTransition = AutoTransition()
-            autoTransition.duration = 1000
-            TransitionManager.beginDelayedTransition(binding.transitionsContainer, autoTransition)
-            binding.text.requestLayout()
-            val paramsButton = binding.btnOrange.layoutParams as ConstraintLayout.LayoutParams
-            paramsButton.bottomToTop = binding.text.id
-            paramsButton.endToStart = binding.btnIndigo.id
-            paramsButton.startToStart = ConstraintSet.PARENT_ID
-            paramsButton.topToTop = ConstraintSet.PARENT_ID
-            textISVisible = !textISVisible
+        Handler(requireActivity().mainLooper).post {
+            val transitionSet = TransitionSet()
+            val fade = Fade()
+            val changeBounds = ChangeBounds()
+            fade.duration = 1000
+            changeBounds.duration = 1000
+            transitionSet.addTransition(fade)
+            transitionSet.ordering = TransitionSet.ORDERING_SEQUENTIAL
+            transitionSet.addTransition(changeBounds)
+            TransitionManager.beginDelayedTransition(binding.transitionsContainer, transitionSet)
+            binding.guideline1.setGuidelinePercent(0.15F)
+            binding.guideline2.setGuidelinePercent(0.15F)
 
-            binding.text.visibility = if (textISVisible) View.VISIBLE else View.GONE
-            binding.btnOrange.requestLayout()
 
-        }
-        if (parentActivity.getCurrentTheme() == R.style.MyThemeBlueGray) {
-            TransitionManager.beginDelayedTransition(binding.transitionsContainer)
-            val params = binding.text.layoutParams as ConstraintLayout.LayoutParams
-            params.endToEnd = binding.btnBlueGray.id
-            params.startToStart = binding.btnBlueGray.id
-            params.topToBottom = binding.btnBlueGray.id
-            binding.text.requestLayout()
-            val paramsButton = binding.btnBlueGray.layoutParams as ConstraintLayout.LayoutParams
-            paramsButton.bottomToTop = binding.text.id
-            binding.btnOrange.requestLayout()
-
-        }
-        if (parentActivity.getCurrentTheme() == R.style.MyThemeIndigo) {
-            TransitionManager.beginDelayedTransition(binding.transitionsContainer)
-            val params = binding.text.layoutParams as ConstraintLayout.LayoutParams
-            params.endToEnd = binding.btnIndigo.id
-            params.startToStart = binding.btnIndigo.id
-            params.topToBottom = binding.btnIndigo.id
-            binding.text.requestLayout()
-            val paramsButton = binding.btnIndigo.layoutParams as ConstraintLayout.LayoutParams
-            paramsButton.bottomToTop = binding.text.id
-            binding.btnOrange.requestLayout()
-
+            if (parentActivity.getCurrentTheme() == R.style.MyThemeOrange) {
+                binding.textOrange.visibility = View.VISIBLE
+            }
+            if (parentActivity.getCurrentTheme() == R.style.MyThemeBlueGray) {
+                binding.textBlueGray.visibility = View.VISIBLE
+            }
+            if (parentActivity.getCurrentTheme() == R.style.MyThemeIndigo) {
+                binding.textIndigo.visibility = View.VISIBLE
+            }
         }
     }
 
     private fun initBtnStyle() {
         binding.btnOrange.setOnClickListener {
-            val paramsButton = binding.btnOrange.layoutParams as ConstraintLayout.LayoutParams
-            paramsButton.bottomToTop = binding.text.id
-            paramsButton.endToStart = ConstraintSet.PARENT_ID
-            paramsButton.topToTop = ConstraintSet.PARENT_ID
-            binding.btnOrange.requestLayout()
-            Thread.sleep(5000)
-
-            val autoTransition = AutoTransition()
-            autoTransition.duration = 5000
-            TransitionManager.beginDelayedTransition(binding.transitionsContainer, autoTransition)
-            textISVisible = !textISVisible
-//            binding.text.visibility = if (textISVisible) View.VISIBLE else View.GONE
-            val params = binding.text.layoutParams as ConstraintLayout.LayoutParams
-            params.endToEnd = binding.btnOrange.id
-            params.startToStart = binding.btnOrange.id
-            params.topToBottom = binding.btnOrange.id
-            paramsButton.bottomToTop = binding.text.id
-            paramsButton.endToStart = binding.btnIndigo.id
-            paramsButton.startToStart = ConstraintSet.PARENT_ID
-            paramsButton.topToTop = ConstraintSet.PARENT_ID
-            binding.btnOrange.requestLayout()
-
             if (parentActivity.getCurrentTheme() != R.style.MyThemeOrange) {
                 parentActivity.setCurrentTheme(R.style.MyThemeOrange)
                 parentActivity.recreate()
-
             }
         }
         binding.btnBlueGray.setOnClickListener {
