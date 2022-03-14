@@ -15,8 +15,6 @@ import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import com.chester095.nasa.R
 import com.chester095.nasa.databinding.FragmentStylesBinding
-import kotlinx.coroutines.delay
-
 
 class StylesFragment : Fragment() {
 
@@ -52,39 +50,27 @@ class StylesFragment : Fragment() {
         initTheme()
         initThemeListener()
         initBtnStyle()
-        initText()
+        initMainBtn()
+    }
+
+    private fun initMainBtn() {
+        binding.btnMain.setOnClickListener {
+            val autoTransition = AutoTransition()
+            autoTransition.duration = 5000
+            TransitionManager.beginDelayedTransition(binding.transitionsContainer, autoTransition)
+            binding.btnMain.visibility = View.GONE
+            binding.btnMain.
+            binding.btnOrange.requestLayout()
+
+            initText()
+        }
     }
 
     private fun initText() {
-        val paramsButton = binding.btnOrange.layoutParams as ConstraintLayout.LayoutParams
-        paramsButton.bottomToTop = binding.text.id
-        paramsButton.endToStart = ConstraintSet.PARENT_ID
-        paramsButton.topToTop = ConstraintSet.PARENT_ID
-        binding.btnOrange.requestLayout()
-
-        val autoTransition = AutoTransition()
-        autoTransition.duration = 5000
-        TransitionManager.beginDelayedTransition(binding.transitionsContainer, autoTransition)
-        textISVisible = !textISVisible
-        binding.text.visibility = if (textISVisible) View.VISIBLE else View.GONE
-        val params = binding.text.layoutParams as ConstraintLayout.LayoutParams
-        params.endToEnd = binding.btnOrange.id
-        params.startToStart = binding.btnOrange.id
-        params.topToBottom = binding.btnOrange.id
-        paramsButton.bottomToTop = binding.text.id
-        paramsButton.endToStart = binding.btnIndigo.id
-        paramsButton.startToStart = ConstraintSet.PARENT_ID
-        paramsButton.topToTop = ConstraintSet.PARENT_ID
-        binding.btnOrange.requestLayout()
-
         if (parentActivity.getCurrentTheme() == R.style.MyThemeOrange) {
-            val params = binding.text.layoutParams as ConstraintLayout.LayoutParams
-            params.endToEnd = binding.btnOrange.id
-            params.startToStart = binding.btnOrange.id
-            params.topToBottom = binding.btnOrange.id
 
             val autoTransition = AutoTransition()
-            autoTransition.duration = 5000
+            autoTransition.duration = 1000
             TransitionManager.beginDelayedTransition(binding.transitionsContainer, autoTransition)
             binding.text.requestLayout()
             val paramsButton = binding.btnOrange.layoutParams as ConstraintLayout.LayoutParams
@@ -92,6 +78,9 @@ class StylesFragment : Fragment() {
             paramsButton.endToStart = binding.btnIndigo.id
             paramsButton.startToStart = ConstraintSet.PARENT_ID
             paramsButton.topToTop = ConstraintSet.PARENT_ID
+            textISVisible = !textISVisible
+
+            binding.text.visibility = if (textISVisible) View.VISIBLE else View.GONE
             binding.btnOrange.requestLayout()
 
         }
@@ -123,6 +112,28 @@ class StylesFragment : Fragment() {
 
     private fun initBtnStyle() {
         binding.btnOrange.setOnClickListener {
+            val paramsButton = binding.btnOrange.layoutParams as ConstraintLayout.LayoutParams
+            paramsButton.bottomToTop = binding.text.id
+            paramsButton.endToStart = ConstraintSet.PARENT_ID
+            paramsButton.topToTop = ConstraintSet.PARENT_ID
+            binding.btnOrange.requestLayout()
+            Thread.sleep(5000)
+
+            val autoTransition = AutoTransition()
+            autoTransition.duration = 5000
+            TransitionManager.beginDelayedTransition(binding.transitionsContainer, autoTransition)
+            textISVisible = !textISVisible
+//            binding.text.visibility = if (textISVisible) View.VISIBLE else View.GONE
+            val params = binding.text.layoutParams as ConstraintLayout.LayoutParams
+            params.endToEnd = binding.btnOrange.id
+            params.startToStart = binding.btnOrange.id
+            params.topToBottom = binding.btnOrange.id
+            paramsButton.bottomToTop = binding.text.id
+            paramsButton.endToStart = binding.btnIndigo.id
+            paramsButton.startToStart = ConstraintSet.PARENT_ID
+            paramsButton.topToTop = ConstraintSet.PARENT_ID
+            binding.btnOrange.requestLayout()
+
             if (parentActivity.getCurrentTheme() != R.style.MyThemeOrange) {
                 parentActivity.setCurrentTheme(R.style.MyThemeOrange)
                 parentActivity.recreate()

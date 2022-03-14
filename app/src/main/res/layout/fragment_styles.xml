@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:duration="5000"
+    android:id="@+id/transitionsContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/transitionsContainer">
+    android:duration="5000">
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
@@ -22,14 +22,26 @@
         app:layout_constraintGuide_percent="0.15" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_main"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/push_me"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_orange"
         style="@style/myMaterialButtonStyleOrange"
         android:text="@string/styles_tab_item_orange"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/guideline1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TextContrastCheck" />
+
+        app:layout_constraintBottom_toTopOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text"
@@ -46,9 +58,10 @@
         android:id="@+id/btn_indigo"
         style="@style/myMaterialButtonStyleIndigo"
         android:text="@string/styles_tab_item_indigo"
-        app:layout_constraintBottom_toTopOf="@+id/guideline1"
-        app:layout_constraintEnd_toStartOf="@+id/btn_blue_gray"
         app:layout_constraintStart_toEndOf="@+id/btn_orange"
+        app:layout_constraintEnd_toStartOf="@+id/btn_blue_gray"
+
+        app:layout_constraintBottom_toTopOf="@+id/guideline1"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
@@ -56,7 +69,8 @@
         style="@style/myMaterialButtonStyleBlueGray"
         android:text="@string/styles_tab_item_blue_gray"
         app:layout_constraintBottom_toTopOf="@+id/guideline1"
-        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_indigo"
         app:layout_constraintTop_toTopOf="parent" />
 

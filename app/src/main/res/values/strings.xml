@@ -129,5 +129,6 @@
     <string name="button">Button</string>
     <string name="navigation_animation">Animation</string>
     <string name="choose">Выбрана</string>
+    <string name="push_me">Нажми меня</string>
 
 </resources>
