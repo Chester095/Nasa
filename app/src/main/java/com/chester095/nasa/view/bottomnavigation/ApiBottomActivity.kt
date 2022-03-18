@@ -25,6 +25,7 @@ class ApiBottomActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.bottomNavigationView.setOnItemSelectedListener {
+
             when (it.itemId) {
                 R.id.bottom_view_earth -> {
                     navigateTo(EarthFragment())
