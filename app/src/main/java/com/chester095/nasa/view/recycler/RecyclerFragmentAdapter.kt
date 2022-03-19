@@ -14,8 +14,8 @@ import com.chester095.nasa.databinding.FragmentRecyclerItemMarsBinding
 class RecyclerFragmentAdapter(
     private val onListItemClickListener: OnListItemClickListener,
     private var dataSet: MutableList<Pair<Int, Data>>,
-    private val onStartDragListener:OnStartDragListener
-) : RecyclerView.Adapter<RecyclerFragmentAdapter.BaseViewHolder>(),ItemTouchHelperAdapter {
+    private val onStartDragListener: OnStartDragListener
+) : RecyclerView.Adapter<RecyclerFragmentAdapter.BaseViewHolder>(), ItemTouchHelperAdapter {
 
     override fun getItemViewType(position: Int): Int {
         return dataSet[position].second.type
@@ -75,7 +75,7 @@ class RecyclerFragmentAdapter(
         }
     }
 
-    inner class MarsViewHolder(view: View) : BaseViewHolder(view),ItemTouchHelperViewAdapter {
+    inner class MarsViewHolder(view: View) : BaseViewHolder(view), ItemTouchHelperViewAdapter {
         override fun bind(data: Pair<Int, Data>) {
             FragmentRecyclerItemMarsBinding.bind(itemView).apply {
                 marsImageView.setOnClickListener {
@@ -91,37 +91,39 @@ class RecyclerFragmentAdapter(
                 }
                 marsTextView.setOnClickListener {
                     dataSet[layoutPosition] = dataSet[layoutPosition].let {
-                        val currentState = if(it.first== ITEM_CLOSE) ITEM_OPEN else  ITEM_CLOSE
-                        Pair(currentState,it.second)
+                        val currentState = if (it.first == ITEM_CLOSE) ITEM_OPEN else ITEM_CLOSE
+                        Pair(currentState, it.second)
                     }
                     notifyItemChanged(layoutPosition)
                 }
-                marsDescriptionTextView.visibility = if(data.first== ITEM_CLOSE) View.GONE else View.VISIBLE
+                marsDescriptionTextView.visibility = if (data.first == ITEM_CLOSE) View.GONE else View.VISIBLE
 
                 dragHandleImageView.setOnTouchListener { v, event ->
-                    if(MotionEventCompat.getActionMasked(event)==MotionEvent.ACTION_DOWN){
+                    if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
                         onStartDragListener.onStartDrag(this@MarsViewHolder)
                     }
                     false
                 }
-                
+
             }
         }
 
         private fun moveUp() {
-            // TODO HW убрать java.lang.IndexOutOfBoundsException
-            dataSet.removeAt(layoutPosition).apply {
-                dataSet.add(layoutPosition - 1, this)
+            if (layoutPosition > 1) {
+                dataSet.removeAt(layoutPosition).apply {
+                    dataSet.add(layoutPosition - 1, this)
+                }
+                notifyItemMoved(layoutPosition, layoutPosition - 1)
             }
-            notifyItemMoved(layoutPosition, layoutPosition - 1)
         }
 
         private fun moveDown() {
-            // TODO HW убрать java.lang.IndexOutOfBoundsException
-            dataSet.removeAt(layoutPosition).apply {
-                dataSet.add(layoutPosition + 1, this)
+            if (layoutPosition < dataSet.size-1) {
+                dataSet.removeAt(layoutPosition).apply {
+                    dataSet.add(layoutPosition + 1, this)
+                }
+                notifyItemMoved(layoutPosition, layoutPosition + 1)
             }
-            notifyItemMoved(layoutPosition, layoutPosition + 1)
         }
 
         private fun addItemByPosition() {
@@ -155,8 +157,9 @@ class RecyclerFragmentAdapter(
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
         dataSet.removeAt(fromPosition).apply {
-            if(toPosition<1) {dataSet.add(1, this)}
-            else dataSet.add(toPosition, this)
+            if (toPosition < 1) {
+                dataSet.add(1, this)
+            } else dataSet.add(toPosition, this)
         }
         notifyItemMoved(fromPosition, toPosition)
     }
