@@ -18,9 +18,9 @@
             android:icon="@drawable/ic_load_error_vector"
             android:title="@string/navigation_coordinator" />
         <item
-            android:id="@+id/navigation_one"
+            android:id="@+id/navigation_api"
             android:icon="@drawable/ic_archive"
-            android:title="@string/api_activity" />
+            android:title="@string/api_fragment" />
         <item
             android:id="@+id/navigation_two"
             android:icon="@drawable/ic_send"

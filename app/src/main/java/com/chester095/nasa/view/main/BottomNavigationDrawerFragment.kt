@@ -12,7 +12,7 @@ import com.chester095.nasa.view.animations.AnimationsFragment
 import com.chester095.nasa.view.bottomnavigation.ApiBottomActivity
 import com.chester095.nasa.view.coordinator.CoordinatorFragment
 import com.chester095.nasa.view.recycler.RecyclerFragment
-import com.chester095.nasa.view.viewpager.ApiActivity
+import com.chester095.nasa.view.viewpager.ApiFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
@@ -49,8 +49,9 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
                     requireActivity().supportFragmentManager.beginTransaction()
                         .replace(R.id.container, CoordinatorFragment.newInstance()).addToBackStack("").commit()
                 }
-                R.id.navigation_one -> {
-                    startActivity(Intent(requireContext(), ApiActivity::class.java))
+                R.id.navigation_api -> {
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, ApiFragment.newInstance()).addToBackStack("").commit()
                 }
                 R.id.navigation_two -> {
                     startActivity(Intent(requireContext(), ApiBottomActivity::class.java))

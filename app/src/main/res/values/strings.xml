@@ -26,7 +26,7 @@
     <string name="rb_system_theme">Системная тема</string>
     <string name="chip_today">Сегодня</string>
     <string name="chip_yesterday">Вчера</string>
-    <string name="api_activity">ApiActivity</string>
+    <string name="api_fragment">ApiFragment</string>
     <string name="api_bottom_activity">ApiBottomActivity</string>
 
     <string name="large_text">

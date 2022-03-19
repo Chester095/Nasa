@@ -22,11 +22,6 @@
         </activity>
 
         <activity
-            android:name=".view.viewpager.ApiActivity"
-            android:exported="true">
-        </activity>
-
-        <activity
             android:name=".view.bottomnavigation.ApiBottomActivity"
             android:exported="true">
 
