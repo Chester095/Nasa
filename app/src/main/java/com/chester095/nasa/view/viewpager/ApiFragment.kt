@@ -36,9 +36,9 @@ class ApiFragment : Fragment() {
         val tabTitles = arrayOf("Earth", "Mars", "System")
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position -> tab.text = tabTitles[position] }.attach()
 
-        binding.tabLayout.getTabAt(EARTH)?.customView = layoutInflater.inflate(R.layout.activity_api_tablayout_item_earth, null)
-        binding.tabLayout.getTabAt(MARS)?.customView = layoutInflater.inflate(R.layout.activity_api_tablayout_item_mars, null)
-        binding.tabLayout.getTabAt(SYSTEM)?.customView = layoutInflater.inflate(R.layout.activity_api_tablayout_item_system, null)
+        binding.tabLayout.getTabAt(EARTH)?.customView = layoutInflater.inflate(R.layout.fragment_api_tablayout_item_earth, null)
+        binding.tabLayout.getTabAt(MARS)?.customView = layoutInflater.inflate(R.layout.fragment_api_tablayout_item_mars, null)
+        binding.tabLayout.getTabAt(SYSTEM)?.customView = layoutInflater.inflate(R.layout.fragment_api_tablayout_item_system, null)
     }
 
 
