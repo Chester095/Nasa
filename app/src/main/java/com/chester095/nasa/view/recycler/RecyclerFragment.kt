@@ -102,8 +102,6 @@ data.sortWith{l,r->
             adapter.addItem()
             binding.recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
         }
-
-
     }
 
     class ItemTouchHelperCallback(private val adapter: RecyclerFragmentAdapter) : ItemTouchHelper.Callback() {

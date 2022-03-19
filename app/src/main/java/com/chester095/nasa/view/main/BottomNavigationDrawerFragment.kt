@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.chester095.nasa.R
 import com.chester095.nasa.databinding.BottomNavigationLayoutBinding
 import com.chester095.nasa.view.StylesFragment
-import com.chester095.nasa.view.animations.AnimationsActivity
+import com.chester095.nasa.view.animations.AnimationsFragment
 import com.chester095.nasa.view.bottomnavigation.ApiBottomActivity
 import com.chester095.nasa.view.coordinator.CoordinatorFragment
 import com.chester095.nasa.view.recycler.RecyclerFragment
@@ -33,16 +33,17 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.navigationView.setNavigationItemSelectedListener { menu ->
             when (menu.itemId) {
+                R.id.navigation_recycler -> {
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, RecyclerFragment.newInstance()).addToBackStack("").commit()
+                }
                 R.id.navigation_animation -> {
-                    startActivity(Intent(requireContext(), AnimationsActivity::class.java))
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, AnimationsFragment.newInstance()).addToBackStack("").commit()
                 }
                 R.id.navigation_style -> {
                     requireActivity().supportFragmentManager.beginTransaction()
                         .replace(R.id.container, StylesFragment.newInstance()).addToBackStack("").commit()
-                }
-                R.id.navigation_recycler -> {
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, RecyclerFragment.newInstance()).addToBackStack("").commit()
                 }
                 R.id.navigation_coordinator -> {
                     requireActivity().supportFragmentManager.beginTransaction()
