@@ -20,11 +20,6 @@ import com.chester095.nasa.databinding.FragmentStylesBinding
 
 class StylesFragment : Fragment() {
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = StylesFragment()
-    }
-
     private var textISVisible = false
     private var _binding: FragmentStylesBinding? = null
 

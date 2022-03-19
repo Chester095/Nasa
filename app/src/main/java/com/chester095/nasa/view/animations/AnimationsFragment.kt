@@ -10,15 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.transition.ChangeBounds
 import androidx.transition.TransitionManager
 import com.chester095.nasa.R
-import com.chester095.nasa.databinding.FragmentAnimationsBinding
 import com.chester095.nasa.databinding.FragmentAnimationsBonusStartBinding
 
 class AnimationsFragment : Fragment() {
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = AnimationsFragment()
-    }
 
     private var _binding: FragmentAnimationsBonusStartBinding? = null
     private val binding: FragmentAnimationsBonusStartBinding

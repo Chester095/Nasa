@@ -1,15 +1,15 @@
 package com.chester095.nasa.view.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.chester095.nasa.R
 import com.chester095.nasa.databinding.BottomNavigationLayoutBinding
 import com.chester095.nasa.view.StylesFragment
 import com.chester095.nasa.view.animations.AnimationsFragment
-import com.chester095.nasa.view.bottomnavigation.ApiBottomActivity
+import com.chester095.nasa.view.bottomnavigation.ApiBottomFragment
 import com.chester095.nasa.view.coordinator.CoordinatorFragment
 import com.chester095.nasa.view.recycler.RecyclerFragment
 import com.chester095.nasa.view.viewpager.ApiFragment
@@ -31,35 +31,24 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.navigationView.setNavigationItemSelectedListener { menu ->
             when (menu.itemId) {
-                R.id.navigation_recycler -> {
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, RecyclerFragment.newInstance()).addToBackStack("").commit()
-                }
-                R.id.navigation_animation -> {
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, AnimationsFragment.newInstance()).addToBackStack("").commit()
-                }
-                R.id.navigation_style -> {
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, StylesFragment.newInstance()).addToBackStack("").commit()
-                }
-                R.id.navigation_coordinator -> {
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, CoordinatorFragment.newInstance()).addToBackStack("").commit()
-                }
-                R.id.navigation_api -> {
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, ApiFragment.newInstance()).addToBackStack("").commit()
-                }
-                R.id.navigation_two -> {
-                    startActivity(Intent(requireContext(), ApiBottomActivity::class.java))
-                }
+                R.id.navigation_recycler -> navigateTo(RecyclerFragment())
+                R.id.navigation_animation -> navigateTo(AnimationsFragment())
+                R.id.navigation_style -> navigateTo(StylesFragment())
+                R.id.navigation_coordinator -> navigateTo(CoordinatorFragment())
+                R.id.navigation_api -> navigateTo(ApiFragment())
+                R.id.navigation_api_bottom -> navigateTo(ApiBottomFragment())
             }
             dismiss()
             true
         }
+    }
+
+    private fun navigateTo(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.container, fragment).addToBackStack("").commit()
     }
 
 }

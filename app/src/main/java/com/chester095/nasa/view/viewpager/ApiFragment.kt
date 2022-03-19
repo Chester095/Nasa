@@ -1,5 +1,6 @@
 package com.chester095.nasa.view.viewpager
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,15 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.chester095.nasa.R
 import com.chester095.nasa.databinding.FragmentApiBinding
-import com.chester095.nasa.view.KEY_CURRENT_THEME
-import com.chester095.nasa.view.KEY_SP
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ApiFragment : Fragment() {
-    companion object {
-        @JvmStatic
-        fun newInstance() = ApiFragment()
-    }
+
 
     private var _binding: FragmentApiBinding? = null
     private val binding: FragmentApiBinding
@@ -32,6 +28,7 @@ class ApiFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("InflateParams")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

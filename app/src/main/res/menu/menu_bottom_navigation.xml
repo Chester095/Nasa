@@ -22,8 +22,8 @@
             android:icon="@drawable/ic_archive"
             android:title="@string/api_fragment" />
         <item
-            android:id="@+id/navigation_two"
+            android:id="@+id/navigation_api_bottom"
             android:icon="@drawable/ic_send"
-            android:title="@string/api_bottom_activity" />
+            android:title="@string/api_bottom_fragment" />
     </group>
 </menu>

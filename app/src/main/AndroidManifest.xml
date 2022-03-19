@@ -21,11 +21,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".view.bottomnavigation.ApiBottomActivity"
-            android:exported="true">
-
-        </activity>
     </application>
 
 </manifest>
