@@ -154,10 +154,9 @@ class RecyclerActivityAdapter(
     }
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
-        // TODO HW Запретить поднимать элементы выше, чем Заголовок
-
         dataSet.removeAt(fromPosition).apply {
-            dataSet.add(toPosition, this)
+            if(toPosition<1) {dataSet.add(1, this)}
+            else dataSet.add(toPosition, this)
         }
         notifyItemMoved(fromPosition, toPosition)
     }
