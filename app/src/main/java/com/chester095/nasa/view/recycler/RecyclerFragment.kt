@@ -1,20 +1,41 @@
 package com.chester095.nasa.view.recycler
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.chester095.nasa.databinding.ActivityRecyclerBinding
+import com.chester095.nasa.databinding.FragmentRecyclerBinding
 
-class RecyclerActivity : AppCompatActivity() {
-    lateinit var adapter: RecyclerActivityAdapter
-    lateinit var binding: ActivityRecyclerBinding
+class RecyclerFragment : Fragment() {
+    companion object {
+        @JvmStatic
+        fun newInstance() = RecyclerFragment()
+    }
+
+    lateinit var adapter: RecyclerFragmentAdapter
+    private var _binding: FragmentRecyclerBinding? = null
+    private val binding: FragmentRecyclerBinding
+        get() {
+            return _binding!!
+        }
+
     lateinit var itemTouchHelper: ItemTouchHelper
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityRecyclerBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentRecyclerBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val data = arrayListOf(
             //Data("",type = TYPE_HEADER),
             Pair(ITEM_CLOSE, Data("Earth", type = TYPE_EARTH)),
@@ -68,8 +89,8 @@ data.sortWith{l,r->
         pair3.third
 
 
-        adapter = RecyclerActivityAdapter({
-            Toast.makeText(this@RecyclerActivity, it.someText, Toast.LENGTH_SHORT).show()
+        adapter = RecyclerFragmentAdapter({
+            Toast.makeText(requireContext(), it.someText, Toast.LENGTH_SHORT).show()
         }, data, {
             itemTouchHelper.startDrag(it)
         })
@@ -85,7 +106,7 @@ data.sortWith{l,r->
 
     }
 
-    class ItemTouchHelperCallback(private val adapter: RecyclerActivityAdapter) : ItemTouchHelper.Callback() {
+    class ItemTouchHelperCallback(private val adapter: RecyclerFragmentAdapter) : ItemTouchHelper.Callback() {
 
         override fun isLongPressDragEnabled(): Boolean {
             return true
@@ -118,7 +139,7 @@ data.sortWith{l,r->
         }
 
         override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
-            if (viewHolder !is RecyclerActivityAdapter.MarsViewHolder) {
+            if (viewHolder !is RecyclerFragmentAdapter.MarsViewHolder) {
                 return super.onSelectedChanged(viewHolder, actionState)
             }
             if (actionState != ItemTouchHelper.ACTION_STATE_IDLE) {
@@ -129,12 +150,17 @@ data.sortWith{l,r->
 
         override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
 
-            if (viewHolder !is RecyclerActivityAdapter.MarsViewHolder) {
+            if (viewHolder !is RecyclerFragmentAdapter.MarsViewHolder) {
                 return super.clearView(recyclerView, viewHolder)
             }
             (viewHolder as ItemTouchHelperViewAdapter).onItemClear()
             super.clearView(recyclerView, viewHolder)
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

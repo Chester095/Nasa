@@ -7,15 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.MotionEventCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.chester095.nasa.databinding.ActivityRecyclerItemEarthBinding
-import com.chester095.nasa.databinding.ActivityRecyclerItemHeaderBinding
-import com.chester095.nasa.databinding.ActivityRecyclerItemMarsBinding
+import com.chester095.nasa.databinding.FragmentRecyclerItemEarthBinding
+import com.chester095.nasa.databinding.FragmentRecyclerItemHeaderBinding
+import com.chester095.nasa.databinding.FragmentRecyclerItemMarsBinding
 
-class RecyclerActivityAdapter(
+class RecyclerFragmentAdapter(
     private val onListItemClickListener: OnListItemClickListener,
     private var dataSet: MutableList<Pair<Int, Data>>,
     private val onStartDragListener:OnStartDragListener
-) : RecyclerView.Adapter<RecyclerActivityAdapter.BaseViewHolder>(),ItemTouchHelperAdapter {
+) : RecyclerView.Adapter<RecyclerFragmentAdapter.BaseViewHolder>(),ItemTouchHelperAdapter {
 
     override fun getItemViewType(position: Int): Int {
         return dataSet[position].second.type
@@ -24,22 +24,22 @@ class RecyclerActivityAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         when (viewType) {
             TYPE_EARTH -> {
-                val itemBinding: ActivityRecyclerItemEarthBinding =
-                    ActivityRecyclerItemEarthBinding.inflate(
+                val itemBinding: FragmentRecyclerItemEarthBinding =
+                    FragmentRecyclerItemEarthBinding.inflate(
                         LayoutInflater.from(parent.context), parent, false
                     )
                 return EarthViewHolder(itemBinding.root)
             }
             TYPE_MARS -> {
-                val itemBinding: ActivityRecyclerItemMarsBinding =
-                    ActivityRecyclerItemMarsBinding.inflate(
+                val itemBinding: FragmentRecyclerItemMarsBinding =
+                    FragmentRecyclerItemMarsBinding.inflate(
                         LayoutInflater.from(parent.context), parent, false
                     )
                 return MarsViewHolder(itemBinding.root)
             }
             else -> {
-                val itemBinding: ActivityRecyclerItemHeaderBinding =
-                    ActivityRecyclerItemHeaderBinding.inflate(
+                val itemBinding: FragmentRecyclerItemHeaderBinding =
+                    FragmentRecyclerItemHeaderBinding.inflate(
                         LayoutInflater.from(parent.context), parent, false
                     )
                 return HeaderViewHolder(itemBinding.root)
@@ -67,7 +67,7 @@ class RecyclerActivityAdapter(
 
     inner class EarthViewHolder(view: View) : BaseViewHolder(view) {
         override fun bind(data: Pair<Int, Data>) {
-            ActivityRecyclerItemEarthBinding.bind(itemView).apply {
+            FragmentRecyclerItemEarthBinding.bind(itemView).apply {
                 earthImageView.setOnClickListener {
                     onListItemClickListener.onItemClick(data.second)
                 }
@@ -77,7 +77,7 @@ class RecyclerActivityAdapter(
 
     inner class MarsViewHolder(view: View) : BaseViewHolder(view),ItemTouchHelperViewAdapter {
         override fun bind(data: Pair<Int, Data>) {
-            ActivityRecyclerItemMarsBinding.bind(itemView).apply {
+            FragmentRecyclerItemMarsBinding.bind(itemView).apply {
                 marsImageView.setOnClickListener {
                     onListItemClickListener.onItemClick(data.second)
                 }
@@ -143,9 +143,9 @@ class RecyclerActivityAdapter(
         }
     }
 
-    inner class HeaderViewHolder(view: View) : RecyclerActivityAdapter.BaseViewHolder(view) {
+    inner class HeaderViewHolder(view: View) : RecyclerFragmentAdapter.BaseViewHolder(view) {
         override fun bind(data: Pair<Int, Data>) {
-            ActivityRecyclerItemHeaderBinding.bind(itemView).apply {
+            FragmentRecyclerItemHeaderBinding.bind(itemView).apply {
                 header.setOnClickListener {
                     onListItemClickListener.onItemClick(data.second)
                 }
