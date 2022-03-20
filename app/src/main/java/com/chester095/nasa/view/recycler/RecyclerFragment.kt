@@ -1,14 +1,14 @@
 package com.chester095.nasa.view.recycler
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.chester095.nasa.R
 import com.chester095.nasa.databinding.FragmentRecyclerBinding
+import com.chester095.nasa.view.MainActivity
 
 class RecyclerFragment : Fragment() {
     companion object {
@@ -35,7 +35,8 @@ class RecyclerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        (requireActivity() as MainActivity).setSupportActionBar(binding.recyclerBottomAppBar)
+        setHasOptionsMenu(true)
         val data = arrayListOf(
             //Data("",type = TYPE_HEADER),
             Pair(ITEM_CLOSE, Data("Earth", type = TYPE_EARTH)),
@@ -98,7 +99,7 @@ data.sortWith{l,r->
         binding.recyclerView.adapter = adapter
         itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(adapter))
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
-        binding.recyclerActivityFAB.setOnClickListener {
+        binding.recyclerFAB.setOnClickListener {
             adapter.addItem()
             binding.recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
         }
@@ -155,6 +156,11 @@ data.sortWith{l,r->
             super.clearView(recyclerView, viewHolder)
         }
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_bottom_bar_recycler, menu)
     }
 
     override fun onDestroy() {

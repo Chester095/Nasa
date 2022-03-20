@@ -19,7 +19,7 @@ import androidx.transition.TransitionManager
 import coil.load
 import com.chester095.nasa.BuildConfig
 import com.chester095.nasa.R
-import com.chester095.nasa.databinding.FragmentMainBinding
+import com.chester095.nasa.databinding.FragmentPictureOfTheDayBinding
 import com.chester095.nasa.view.MainActivity
 import com.chester095.nasa.view.settings.SettingsFragment
 import com.chester095.nasa.viewmodel.AppState
@@ -31,8 +31,8 @@ import com.google.android.material.snackbar.Snackbar
 class PictureOfTheDayFragment : Fragment() {
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
-    private var _binding: FragmentMainBinding? = null
-    private val binding: FragmentMainBinding
+    private var _binding: FragmentPictureOfTheDayBinding? = null
+    private val binding: FragmentPictureOfTheDayBinding
         get() {
             return _binding!!
         }
@@ -64,7 +64,7 @@ class PictureOfTheDayFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
         return binding.root
     }
 
