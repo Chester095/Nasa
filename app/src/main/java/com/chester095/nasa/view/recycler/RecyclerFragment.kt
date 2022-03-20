@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chester095.nasa.R
 import com.chester095.nasa.databinding.FragmentRecyclerBinding
 import com.chester095.nasa.view.MainActivity
+import com.chester095.nasa.view.main.BottomNavigationDrawerFragment
+import com.chester095.nasa.view.settings.SettingsFragment
 
 class RecyclerFragment : Fragment() {
     companion object {
@@ -103,6 +105,23 @@ data.sortWith{l,r->
             adapter.addItem()
             binding.recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.app_bar_find_recycler -> {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, FilterFragment.newInstance())
+                    .addToBackStack("").commit()
+            }
+            R.id.app_bar_settings_recycler -> {
+//                    Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT).show()
+            }
+            android.R.id.home -> {
+                BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "ff")
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     class ItemTouchHelperCallback(private val adapter: RecyclerFragmentAdapter) : ItemTouchHelper.Callback() {
