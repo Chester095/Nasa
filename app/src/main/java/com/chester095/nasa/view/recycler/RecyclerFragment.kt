@@ -1,6 +1,7 @@
 package com.chester095.nasa.view.recycler
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -10,15 +11,11 @@ import com.chester095.nasa.R
 import com.chester095.nasa.databinding.FragmentRecyclerBinding
 import com.chester095.nasa.view.MainActivity
 import com.chester095.nasa.view.main.BottomNavigationDrawerFragment
-import com.chester095.nasa.view.settings.SettingsFragment
 
 class RecyclerFragment : Fragment() {
-    companion object {
-        @JvmStatic
-        fun newInstance() = RecyclerFragment()
-    }
 
-    lateinit var adapter: RecyclerFragmentAdapter
+    var data = arrayListOf<Pair<Int, Data>>()
+    private lateinit var adapter: RecyclerFragmentAdapter
     private var _binding: FragmentRecyclerBinding? = null
     private val binding: FragmentRecyclerBinding
         get() {
@@ -39,18 +36,17 @@ class RecyclerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as MainActivity).setSupportActionBar(binding.recyclerBottomAppBar)
         setHasOptionsMenu(true)
-        val data = arrayListOf(
-            //Data("",type = TYPE_HEADER),
-            Pair(ITEM_CLOSE, Data("Earth", type = TYPE_EARTH)),
-            Pair(ITEM_CLOSE, Data("Earth", type = TYPE_EARTH)),
-            Pair(ITEM_CLOSE, Data("Mars", "", type = TYPE_MARS)),
-            Pair(ITEM_CLOSE, Data("Earth", type = TYPE_EARTH)),
-            Pair(ITEM_CLOSE, Data("Earth", type = TYPE_EARTH)),
-            Pair(ITEM_CLOSE, Data("Earth", type = TYPE_EARTH)),
-            Pair(ITEM_CLOSE, Data("Mars", "", type = TYPE_MARS))
+        if (data.size == 0) {
+            data.add(0, Pair(ITEM_CLOSE, Data(someText = "Заголовок", type = TYPE_HEADER)))
+            data.add(1, Pair(ITEM_CLOSE, Data(someText = "Earth", type = TYPE_EARTH)))
+            data.add(2, Pair(ITEM_CLOSE, Data(someText = "Earth", type = TYPE_EARTH)))
+            data.add(3, Pair(ITEM_CLOSE, Data(someText = "Mars 1", type = TYPE_MARS, weight = 1000)))
+            data.add(4, Pair(ITEM_CLOSE, Data(someText = "Earth", type = TYPE_EARTH)))
+            data.add(5, Pair(ITEM_CLOSE, Data(someText = "Earth", type = TYPE_EARTH)))
+            data.add(6, Pair(ITEM_CLOSE, Data(someText = "Earth", type = TYPE_EARTH)))
+            data.add(7, Pair(ITEM_CLOSE, Data(someText = "Mars 2", type = TYPE_MARS, weight = 2000)))
+        }
 
-        )
-        data.add(0, Pair(ITEM_CLOSE, Data("Заголовок", type = TYPE_HEADER)))
 
         /*
         подсказка по пункту
@@ -61,19 +57,6 @@ class RecyclerFragment : Fragment() {
            //it.second.weight==1000
         }
              */
-
-/*
-подсказка по пункту
-* Добавьте назначение приоритета заметкам.
-
-data.get(2).second.weight = 1000
-data.sortWith{l,r->
-   if(l.second.weight>r.second.weight){
-       -1
-   }else{
-       1
-   }
-}*/
 
 
         val lat = 23
@@ -114,8 +97,18 @@ data.sortWith{l,r->
                     .replace(R.id.container, FilterFragment.newInstance())
                     .addToBackStack("").commit()
             }
-            R.id.app_bar_settings_recycler -> {
-//                    Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT).show()
+            R.id.app_bar_sort_recycler -> {
+                data.get(2).second.weight = 1000
+                data.sortWith(compareBy { it.second.weight })
+                data.forEach{Log.d("!!!", "   "+ it)}
+/*                data.sortedWith { l, r ->
+                    if (l.second.weight > r.second.weight) {
+                        1
+                    } else {
+                        -1
+                    }
+//                    Log.d("!!!", "l "+ l + "   r " + r)
+                }*/
             }
             android.R.id.home -> {
                 BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "ff")

@@ -51,6 +51,20 @@ class RecyclerFragmentAdapter(
         holder.bind(dataSet[position])
     }
 
+    override fun onBindViewHolder(
+        holder: BaseViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if(payloads.isNotEmpty()&&(holder is MarsViewHolder)){
+            val pair = createCombinePayload(payloads as List<Change<Pair<Int, Data>>>)
+            FragmentRecyclerItemMarsBinding.bind(holder.itemView).marsTextView.text = pair.newData.second.someText
+        }else{
+            super.onBindViewHolder(holder, position, payloads)
+        }
+
+    }
+
     override fun getItemCount() = dataSet.size
 
     fun addItem() {
@@ -58,7 +72,7 @@ class RecyclerFragmentAdapter(
         notifyItemInserted(itemCount - 1)
     }
 
-    private fun generateNewItem() = Pair(ITEM_CLOSE, Data("new Mars", type = TYPE_MARS))
+    private fun generateNewItem() = Pair(ITEM_CLOSE, Data(someText ="new Mars", type = TYPE_MARS))
 
 
     abstract class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {

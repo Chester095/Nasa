@@ -9,7 +9,7 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/app_bar_settings_recycler"
+        android:id="@+id/app_bar_sort_recycler"
         android:icon="@drawable/ic_sort"
         android:title="@string/sort_by_weight"
         app:showAsAction="always" />
