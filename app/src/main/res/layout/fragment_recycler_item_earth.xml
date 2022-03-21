@@ -6,14 +6,15 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/earthImageView"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toStartOf="@+id/descriptionTextView"
+        app:layout_constraintStart_toEndOf="@+id/text_earth"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bg_earth" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_earth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Земля"
@@ -21,6 +22,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/earthImageView"
         app:layout_constraintEnd_toStartOf="@+id/earthImageView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/earthImageView" />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -40,9 +42,34 @@
         android:textColor="#000"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/earthImageView"
-        app:layout_constraintEnd_toStartOf="@+id/barrier"
+        app:layout_constraintEnd_toStartOf="@+id/upWeight"
         app:layout_constraintStart_toEndOf="@+id/earthImageView"
         app:layout_constraintTop_toTopOf="@+id/earthImageView" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/upWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/red"
+        app:layout_constraintBottom_toTopOf="@+id/downWeight"
+        app:layout_constraintEnd_toStartOf="@+id/wikiImageView"
+        app:layout_constraintStart_toEndOf="@+id/descriptionTextView"
+        app:layout_constraintTop_toTopOf="@+id/earthImageView"
+        app:srcCompat="@drawable/ic_add_weight" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/downWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/red"
+        app:layout_constraintBottom_toBottomOf="@+id/earthImageView"
+        app:layout_constraintEnd_toStartOf="@+id/upWeight"
+        app:layout_constraintStart_toEndOf="@+id/upWeight"
+        app:layout_constraintTop_toBottomOf="@+id/upWeight"
+        app:srcCompat="@drawable/ic_remove_weight" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"

@@ -37,14 +37,14 @@ class RecyclerFragment : Fragment() {
         (requireActivity() as MainActivity).setSupportActionBar(binding.recyclerBottomAppBar)
         setHasOptionsMenu(true)
         if (data.size == 0) {
-            data.add(0, Pair(ITEM_CLOSE, Data(someText = "Заголовок", type = TYPE_HEADER)))
-            data.add(1, Pair(ITEM_CLOSE, Data(someText = "Earth", type = TYPE_EARTH)))
-            data.add(2, Pair(ITEM_CLOSE, Data(someText = "Earth", type = TYPE_EARTH)))
-            data.add(3, Pair(ITEM_CLOSE, Data(someText = "Mars 1", type = TYPE_MARS, weight = 1000)))
-            data.add(4, Pair(ITEM_CLOSE, Data(someText = "Earth", type = TYPE_EARTH)))
-            data.add(5, Pair(ITEM_CLOSE, Data(someText = "Earth", type = TYPE_EARTH)))
-            data.add(6, Pair(ITEM_CLOSE, Data(someText = "Earth", type = TYPE_EARTH)))
-            data.add(7, Pair(ITEM_CLOSE, Data(someText = "Mars 2", type = TYPE_MARS, weight = 2000)))
+            data.add(0, Pair(ITEM_CLOSE, Data(id=0, someText = "Заголовок", type = TYPE_HEADER)))
+            data.add(1, Pair(ITEM_CLOSE, Data(id=1, someText = "Earth", type = TYPE_EARTH)))
+            data.add(2, Pair(ITEM_CLOSE, Data(id=2, someText = "Earth", type = TYPE_EARTH)))
+            data.add(3, Pair(ITEM_CLOSE, Data(id=3, someText = "Mars 1", type = TYPE_MARS, weight = 1000)))
+            data.add(4, Pair(ITEM_CLOSE, Data(id=4, someText = "Earth", type = TYPE_EARTH)))
+            data.add(5, Pair(ITEM_CLOSE, Data(id=5, someText = "Earth", type = TYPE_EARTH)))
+            data.add(6, Pair(ITEM_CLOSE, Data(id=6, someText = "Earth", type = TYPE_EARTH)))
+            data.add(7, Pair(ITEM_CLOSE, Data(id=7, someText = "Mars 2", type = TYPE_MARS, weight = 2000)))
         }
 
 

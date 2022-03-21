@@ -56,10 +56,10 @@ class RecyclerFragmentAdapter(
         position: Int,
         payloads: MutableList<Any>
     ) {
-        if(payloads.isNotEmpty()&&(holder is MarsViewHolder)){
+        if (payloads.isNotEmpty() && (holder is MarsViewHolder)) {
             val pair = createCombinePayload(payloads as List<Change<Pair<Int, Data>>>)
             FragmentRecyclerItemMarsBinding.bind(holder.itemView).marsTextView.text = pair.newData.second.someText
-        }else{
+        } else {
             super.onBindViewHolder(holder, position, payloads)
         }
 
@@ -72,7 +72,7 @@ class RecyclerFragmentAdapter(
         notifyItemInserted(itemCount - 1)
     }
 
-    private fun generateNewItem() = Pair(ITEM_CLOSE, Data(someText ="new Mars", type = TYPE_MARS))
+    private fun generateNewItem() = Pair(ITEM_CLOSE, Data(someText = "new Mars", type = TYPE_MARS))
 
 
     abstract class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -85,7 +85,21 @@ class RecyclerFragmentAdapter(
                 earthImageView.setOnClickListener {
                     onListItemClickListener.onItemClick(data.second)
                 }
+                upWeight.setOnClickListener {
+                    weightUp()
+                }
+                downWeight.setOnClickListener {
+                    weightDown()
+                }
             }
+        }
+
+        private fun weightUp() {
+            dataSet[layoutPosition].second.weight += 100
+        }
+
+        private fun weightDown() {
+            dataSet[layoutPosition].second.weight -= 100
         }
     }
 
@@ -97,12 +111,10 @@ class RecyclerFragmentAdapter(
                 }
                 addItemImageView.setOnClickListener { addItemByPosition() }
                 removeItemImageView.setOnClickListener { removeItem() }
-                moveItemUp.setOnClickListener {
-                    moveUp()
-                }
-                moveItemDown.setOnClickListener {
-                    moveDown()
-                }
+                moveItemUp.setOnClickListener { moveUp() }
+                moveItemDown.setOnClickListener { moveDown() }
+                upWeight.setOnClickListener { weightUp() }
+                downWeight.setOnClickListener { weightDown() }
                 marsTextView.setOnClickListener {
                     dataSet[layoutPosition] = dataSet[layoutPosition].let {
                         val currentState = if (it.first == ITEM_CLOSE) ITEM_OPEN else ITEM_CLOSE
@@ -122,6 +134,14 @@ class RecyclerFragmentAdapter(
             }
         }
 
+        private fun weightUp() {
+            dataSet[layoutPosition].second.weight += 100
+        }
+
+        private fun weightDown() {
+            dataSet[layoutPosition].second.weight -= 100
+        }
+
         private fun moveUp() {
             if (layoutPosition > 1) {
                 dataSet.removeAt(layoutPosition).apply {
@@ -132,7 +152,7 @@ class RecyclerFragmentAdapter(
         }
 
         private fun moveDown() {
-            if (layoutPosition < dataSet.size-1) {
+            if (layoutPosition < dataSet.size - 1) {
                 dataSet.removeAt(layoutPosition).apply {
                     dataSet.add(layoutPosition + 1, this)
                 }
