@@ -37,27 +37,15 @@ class RecyclerFragment : Fragment() {
         (requireActivity() as MainActivity).setSupportActionBar(binding.recyclerBottomAppBar)
         setHasOptionsMenu(true)
         if (data.size == 0) {
-            data.add(0, Pair(ITEM_CLOSE, Data(id=0, someText = "Заголовок", type = TYPE_HEADER, weight = 1000000000)))
-            data.add(1, Pair(ITEM_CLOSE, Data(id=1, someText = "Earth", type = TYPE_EARTH)))
-            data.add(2, Pair(ITEM_CLOSE, Data(id=2, someText = "Earth", type = TYPE_EARTH)))
-            data.add(3, Pair(ITEM_CLOSE, Data(id=3, someText = "Mars 1", type = TYPE_MARS, weight = 1000)))
-            data.add(4, Pair(ITEM_CLOSE, Data(id=4, someText = "Earth", type = TYPE_EARTH)))
-            data.add(5, Pair(ITEM_CLOSE, Data(id=5, someText = "Earth", type = TYPE_EARTH)))
-            data.add(6, Pair(ITEM_CLOSE, Data(id=6, someText = "Earth", type = TYPE_EARTH)))
-            data.add(7, Pair(ITEM_CLOSE, Data(id=7, someText = "Mars 2", type = TYPE_MARS, weight = 2000)))
+            data.add(0, Pair(ITEM_CLOSE, Data(id = 0, someText = "Заголовок", type = TYPE_HEADER, weight = 1000000000)))
+            data.add(1, Pair(ITEM_CLOSE, Data(id = 1, someText = "Earth", type = TYPE_EARTH)))
+            data.add(2, Pair(ITEM_CLOSE, Data(id = 2, someText = "Earth", type = TYPE_EARTH)))
+            data.add(3, Pair(ITEM_CLOSE, Data(id = 3, someText = "Mars 1", type = TYPE_MARS, weight = 1000)))
+            data.add(4, Pair(ITEM_CLOSE, Data(id = 4, someText = "Earth", type = TYPE_EARTH)))
+            data.add(5, Pair(ITEM_CLOSE, Data(id = 5, someText = "Earth", type = TYPE_EARTH)))
+            data.add(6, Pair(ITEM_CLOSE, Data(id = 6, someText = "Earth", type = TYPE_EARTH)))
+            data.add(7, Pair(ITEM_CLOSE, Data(id = 7, someText = "Mars 2", type = TYPE_MARS, weight = 2000)))
         }
-
-
-        /*
-        подсказка по пункту
-        * Добавьте назначение приоритета заметкам.
-        data.filter {
-           it.second.someText.equals("swefg")
-           //it.second.someText.contains("swefg")
-           //it.second.weight==1000
-        }
-             */
-
 
         val lat = 23
         val lon = 21
@@ -94,6 +82,12 @@ class RecyclerFragment : Fragment() {
         when (item.itemId) {
             R.id.app_bar_find_recycler -> {
                 requireActivity().supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(
+                        R.anim.slide_in,
+                        R.anim.fade_out,
+                        R.anim.fade_in,
+                        R.anim.slide_out
+                    )
                     .replace(R.id.container, FilterFragment.newInstance())
                     .addToBackStack("").commit()
             }

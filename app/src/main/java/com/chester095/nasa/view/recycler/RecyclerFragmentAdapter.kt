@@ -72,6 +72,26 @@ class RecyclerFragmentAdapter(
         notifyDataSetChanged()
     }
 
+    fun filter() {
+        dataSet.sortWith(compareByDescending { it.second.weight })
+
+//        dataSet.second.someText.equals("swefg")
+        //it.second.someText.contains("swefg")
+        //it.second.weight==1000
+        notifyDataSetChanged()
+    }
+
+
+    /*
+     подсказка по пункту
+     * Добавьте назначение приоритета заметкам.
+     data.filter {
+        it.second.someText.equals("swefg")
+        //it.second.someText.contains("swefg")
+        //it.second.weight==1000
+     }
+          */
+
     fun addItem() {
         dataSet.add(generateNewItem())
         notifyItemInserted(itemCount - 1)
