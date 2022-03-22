@@ -149,5 +149,10 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
+    <string name="filter_title">title</string>
+    <string name="filter_description">description</string>
+    <string name="filter_type">type</string>
+    <string name="filter_weight_min">weight_min</string>
+    <string name="filter_weight_max">weight_max</string>
 
 </resources>

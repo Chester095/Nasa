@@ -95,6 +95,7 @@ class RecyclerFragment : Fragment() {
                 adapter.sortItemsByWeight()
             }
             android.R.id.home -> {
+                Log.d("!!! R.id.home","")
                 BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "ff")
             }
         }
@@ -140,18 +141,15 @@ class RecyclerFragment : Fragment() {
             if (actionState != ItemTouchHelper.ACTION_STATE_IDLE) {
                 (viewHolder as ItemTouchHelperViewAdapter).onItemSelected()
             }
-
         }
 
         override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
-
             if (viewHolder !is RecyclerFragmentAdapter.MarsViewHolder) {
                 return super.clearView(recyclerView, viewHolder)
             }
             (viewHolder as ItemTouchHelperViewAdapter).onItemClear()
             super.clearView(recyclerView, viewHolder)
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
