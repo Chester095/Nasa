@@ -1,7 +1,6 @@
 package com.chester095.nasa.view.recycler
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -71,8 +70,6 @@ class RecyclerFragmentAdapter(
     fun sortItemsByWeight() {
         dataSet.sortWith(compareByDescending { it.second.weight })
         notifyDataSetChanged()
-        dataSet.forEach { Log.d("!!!", "   " + it) }
-
     }
 
     fun addItem() {
@@ -93,35 +90,31 @@ class RecyclerFragmentAdapter(
                 earthImageView.setOnClickListener {
                     onListItemClickListener.onItemClick(data.second)
                 }
-                upWeight.setOnClickListener {
-                    weightUp()
-                }
-                downWeight.setOnClickListener {
-                    weightDown()
-                }
+                upWeight.setOnClickListener { weightUp(layoutPosition) }
+                downWeight.setOnClickListener { weightDown(layoutPosition) }
             }
         }
+    }
 
-        private fun weightUp() {
-            dataSet[layoutPosition].second.weight += 100
-            if (dataSet[layoutPosition].second.weight > dataSet[layoutPosition - 1].second.weight
-                && layoutPosition > 1
-            ) {
-                dataSet.removeAt(layoutPosition).apply {
-                    dataSet.add(layoutPosition - 1, this)
-                }
-                notifyItemMoved(layoutPosition, layoutPosition - 1)
+    private fun weightUp(layoutPosition: Int) {
+        dataSet[layoutPosition].second.weight += 100
+        if (dataSet[layoutPosition].second.weight > dataSet[layoutPosition - 1].second.weight
+            && layoutPosition > 1
+        ) {
+            dataSet.removeAt(layoutPosition).apply {
+                dataSet.add(layoutPosition - 1, this)
             }
+            notifyItemMoved(layoutPosition, layoutPosition - 1)
         }
+    }
 
-        private fun weightDown() {
-            dataSet[layoutPosition].second.weight -= 100
-            if (dataSet[layoutPosition].second.weight < dataSet[layoutPosition + 1].second.weight) {
-                dataSet.removeAt(layoutPosition).apply {
-                    dataSet.add(layoutPosition + 1, this)
-                }
-                notifyItemMoved(layoutPosition, layoutPosition + 1)
+    private fun weightDown(layoutPosition: Int) {
+        dataSet[layoutPosition].second.weight -= 100
+        if (dataSet[layoutPosition].second.weight < dataSet[layoutPosition + 1].second.weight) {
+            dataSet.removeAt(layoutPosition).apply {
+                dataSet.add(layoutPosition + 1, this)
             }
+            notifyItemMoved(layoutPosition, layoutPosition + 1)
         }
     }
 
@@ -135,8 +128,8 @@ class RecyclerFragmentAdapter(
                 removeItemImageView.setOnClickListener { removeItem() }
                 moveItemUp.setOnClickListener { moveUp() }
                 moveItemDown.setOnClickListener { moveDown() }
-                upWeight.setOnClickListener { weightUp() }
-                downWeight.setOnClickListener { weightDown() }
+                upWeight.setOnClickListener { weightUp(layoutPosition) }
+                downWeight.setOnClickListener { weightDown(layoutPosition) }
                 marsTextView.setOnClickListener {
                     dataSet[layoutPosition] = dataSet[layoutPosition].let {
                         val currentState = if (it.first == ITEM_CLOSE) ITEM_OPEN else ITEM_CLOSE
@@ -153,28 +146,6 @@ class RecyclerFragmentAdapter(
                     false
                 }
 
-            }
-        }
-
-        private fun weightUp() {
-            dataSet[layoutPosition].second.weight += 100
-            if (dataSet[layoutPosition].second.weight > dataSet[layoutPosition - 1].second.weight
-                && layoutPosition > 1
-            ) {
-                dataSet.removeAt(layoutPosition).apply {
-                    dataSet.add(layoutPosition - 1, this)
-                }
-                notifyItemMoved(layoutPosition, layoutPosition - 1)
-            }
-        }
-
-        private fun weightDown() {
-            dataSet[layoutPosition].second.weight -= 100
-            if (dataSet[layoutPosition].second.weight < dataSet[layoutPosition + 1].second.weight) {
-                dataSet.removeAt(layoutPosition).apply {
-                    dataSet.add(layoutPosition + 1, this)
-                }
-                notifyItemMoved(layoutPosition, layoutPosition + 1)
             }
         }
 
