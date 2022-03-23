@@ -74,12 +74,12 @@ class RecyclerFragmentAdapter(
     }
 
     fun filterSomeTextEarth() {
-        dataSet = dataSet.filter { it.second.someText.contains("Earth") } as MutableList<Pair<Int, Data>>
+        dataSet = dataSet.filter { it.second.someText.contains("Earth")  ||  it.second.someText.contains("Заголовок")} as MutableList<Pair<Int, Data>>
         notifyDataSetChanged()
     }
 
     fun filterSomeTextMars() {
-        dataSet = dataSet.filter { it.second.someText.contains("Mars") } as MutableList<Pair<Int, Data>>
+        dataSet = dataSet.filter { it.second.someText.contains("Mars") ||  it.second.someText.contains("Заголовок")} as MutableList<Pair<Int, Data>>
         notifyDataSetChanged()
     }
 

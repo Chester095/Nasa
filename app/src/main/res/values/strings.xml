@@ -154,5 +154,10 @@
     <string name="filter_type">type</string>
     <string name="filter_weight_min">weight_min</string>
     <string name="filter_weight_max">weight_max</string>
+    <string name="only_earth">оставить только Землю</string>
+    <string name="only_mars">оставить только Марс</string>
+    <string name="weight_more_thousand"><![CDATA[вес > 1000]]></string>
+    <string name="weight_less_thousand"><![CDATA[вес <= 1000]]></string>
+    <string name="filtration">Фильтрация</string>
 
 </resources>
