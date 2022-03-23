@@ -4,12 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import com.chester095.nasa.R
 import com.chester095.nasa.databinding.FragmentRecyclerFiltersBinding
+
 
 class FilterFragment : Fragment() {
 
@@ -18,7 +15,6 @@ class FilterFragment : Fragment() {
         fun newInstance() = FilterFragment()
     }
 
-    val editTextTitle: EditText = view.findViewById(R.id.filter_title)
     val bundle = Bundle()
     private var _binding: FragmentRecyclerFiltersBinding? = null
     private val binding: FragmentRecyclerFiltersBinding
@@ -35,36 +31,38 @@ class FilterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnFilterOk.setOnClickListener {
-            val title = editTextTitle.text
-            val viewFragment = ViewFragment()
-            val action = FilterFragmentDirections.actionFragmentOneToFragmentTwo(hello)
-            findNavController().navigate(action)
 
+        setRadioButtons()
+
+        binding.rbSomeTextEarth.setOnClickListener {
+            RecyclerFragment.filterSomeTextEarth = true
+            RecyclerFragment.filterSomeTextMars = false
+            binding.rbSomeTextMars.isChecked = false
+        }
+        binding.rbSomeTextMars.setOnClickListener {
+            RecyclerFragment.filterSomeTextMars = true
+            RecyclerFragment.filterSomeTextEarth = false
+            binding.rbSomeTextEarth.isChecked = false
+        }
+        binding.rbWeightMoreThousand.setOnClickListener {
+            RecyclerFragment.filterWeightMoreThousand = true
+            RecyclerFragment.filterWeightLessThousand = false
+            binding.rbWeightLessThousand.isChecked = false
+        }
+        binding.rbWeightLessThousand.setOnClickListener {
+            RecyclerFragment.filterWeightLessThousand = true
+            RecyclerFragment.filterWeightMoreThousand = false
+            binding.rbWeightMoreThousand.isChecked = false
         }
     }
 
-    fun testFragmentResult() {
-        val scenario = launchFragmentInContainer<ResultFragment>()
-        lateinit var actualResult: String?
-        scenario.onFragment { fragment ->
-            fragment.parentFragmentManagager.setResultListener("requestKey") { key, bundle ->
-                actualResult = bundle.getString("bundleKey")
-            }
-        }
-        onView(withId(R.id.result_button)).perform(click())
-        assertThat(actualResult).isEqualTo("result")
-    }
+    private fun setRadioButtons(){
+        if (RecyclerFragment.filterSomeTextEarth)  binding.rbSomeTextEarth.isChecked = true
+        else if (RecyclerFragment.filterSomeTextMars)  binding.rbSomeTextMars.isChecked = true
+        if (RecyclerFragment.filterWeightMoreThousand)  binding.rbWeightMoreThousand.isChecked = true
+        else if (RecyclerFragment.filterWeightLessThousand)  binding.rbWeightLessThousand.isChecked = true
 
-    class ResultFragment : Fragment(R.layout.fragment_recycler) {
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            view.findViewById(R.id.result_button).setOnClickListener {
-                val result = "result"
-                setResult("requestKey", bundleOf("bundleKey" to result))
-            }
-        }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

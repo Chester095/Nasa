@@ -11,16 +11,25 @@ import com.chester095.nasa.R
 import com.chester095.nasa.databinding.FragmentRecyclerBinding
 import com.chester095.nasa.view.MainActivity
 import com.chester095.nasa.view.main.BottomNavigationDrawerFragment
+import com.chester095.nasa.view.main.PictureOfTheDayFragment
 
 class RecyclerFragment : Fragment() {
 
     var data = arrayListOf<Pair<Int, Data>>()
+
     private lateinit var adapter: RecyclerFragmentAdapter
     private var _binding: FragmentRecyclerBinding? = null
     private val binding: FragmentRecyclerBinding
         get() {
             return _binding!!
         }
+
+    companion object {
+        var filterSomeTextEarth = false
+        var filterSomeTextMars = false
+        var filterWeightMoreThousand = false
+        var filterWeightLessThousand = false
+    }
 
     lateinit var itemTouchHelper: ItemTouchHelper
 
@@ -70,11 +79,25 @@ class RecyclerFragment : Fragment() {
         })
 
         binding.recyclerView.adapter = adapter
+        filterCheck()
         itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(adapter))
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
         binding.recyclerFAB.setOnClickListener {
             adapter.addItem()
             binding.recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
+        }
+    }
+
+    private fun filterCheck() {
+        if (filterSomeTextEarth) {
+            adapter.filterSomeTextEarth()
+        } else if (filterSomeTextMars) {
+            adapter.filterSomeTextMars()
+        }
+        if (filterWeightMoreThousand) {
+            adapter.filterWeightMoreThousand()
+        } else if (filterWeightLessThousand) {
+            adapter.filterWeightLessThousand()
         }
     }
 
@@ -95,7 +118,7 @@ class RecyclerFragment : Fragment() {
                 adapter.sortItemsByWeight()
             }
             android.R.id.home -> {
-                Log.d("!!! R.id.home","")
+                Log.d("!!! R.id.home", "")
                 BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager, "ff")
             }
         }

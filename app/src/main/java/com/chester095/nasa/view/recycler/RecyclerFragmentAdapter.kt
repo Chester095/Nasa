@@ -1,6 +1,7 @@
 package com.chester095.nasa.view.recycler
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -14,7 +15,7 @@ import com.chester095.nasa.databinding.FragmentRecyclerItemMarsBinding
 class RecyclerFragmentAdapter(
     private val onListItemClickListener: OnListItemClickListener,
     private var dataSet: MutableList<Pair<Int, Data>>,
-    private val onStartDragListener: OnStartDragListener
+    private val onStartDragListener: OnStartDragListener,
 ) : RecyclerView.Adapter<RecyclerFragmentAdapter.BaseViewHolder>(), ItemTouchHelperAdapter {
 
     override fun getItemViewType(position: Int): Int {
@@ -72,25 +73,26 @@ class RecyclerFragmentAdapter(
         notifyDataSetChanged()
     }
 
-    fun filter() {
-        dataSet.sortWith(compareByDescending { it.second.weight })
-
-//        dataSet.second.someText.equals("swefg")
-        //it.second.someText.contains("swefg")
-        //it.second.weight==1000
+    fun filterSomeTextEarth() {
+        dataSet = dataSet.filter { it.second.someText.contains("Earth") } as MutableList<Pair<Int, Data>>
         notifyDataSetChanged()
     }
 
+    fun filterSomeTextMars() {
+        dataSet = dataSet.filter { it.second.someText.contains("Mars") } as MutableList<Pair<Int, Data>>
+        notifyDataSetChanged()
+    }
 
-    /*
-     подсказка по пункту
-     * Добавьте назначение приоритета заметкам.
-     data.filter {
-        it.second.someText.equals("swefg")
-        //it.second.someText.contains("swefg")
-        //it.second.weight==1000
-     }
-          */
+    fun filterWeightMoreThousand() {
+        dataSet = dataSet.filter { it.second.weight > 1000 } as MutableList<Pair<Int, Data>>
+        notifyDataSetChanged()
+    }
+
+    fun filterWeightLessThousand() {
+        dataSet = dataSet.filter { it.second.weight <= 1000 } as MutableList<Pair<Int, Data>>
+        notifyDataSetChanged()
+    }
+
 
     fun addItem() {
         dataSet.add(generateNewItem())
@@ -130,15 +132,19 @@ class RecyclerFragmentAdapter(
 
     private fun weightDown(layoutPosition: Int) {
         dataSet[layoutPosition].second.weight -= 100
-        if (dataSet[layoutPosition].second.weight < dataSet[layoutPosition + 1].second.weight) {
-            dataSet.removeAt(layoutPosition).apply {
-                dataSet.add(layoutPosition + 1, this)
+        if (dataSet.size - 1 > layoutPosition) {
+            Log.d("!!!", "layoutPosition " + layoutPosition + "  dataSet.size- " + dataSet.size)
+            if (dataSet[layoutPosition].second.weight < dataSet[layoutPosition + 1].second.weight) {
+                Log.d("!!!", "layoutPosition " + layoutPosition + "  dataSet.size- " + dataSet.size)
+                dataSet.removeAt(layoutPosition).apply {
+                    dataSet.add(layoutPosition + 1, this)
+                }
+                notifyItemMoved(layoutPosition, layoutPosition + 1)
             }
-            notifyItemMoved(layoutPosition, layoutPosition + 1)
         }
     }
 
-    inner class MarsViewHolder(view: View) : BaseViewHolder(view), ItemTouchHelperViewAdapter {
+    inner class MarsViewHolder(view: View) : RecyclerFragmentAdapter.BaseViewHolder(view), ItemTouchHelperViewAdapter {
         override fun bind(data: Pair<Int, Data>) {
             FragmentRecyclerItemMarsBinding.bind(itemView).apply {
                 marsImageView.setOnClickListener {
