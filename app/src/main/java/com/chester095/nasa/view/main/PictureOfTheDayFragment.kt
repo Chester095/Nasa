@@ -3,6 +3,7 @@ package com.chester095.nasa.view.main
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -76,16 +77,18 @@ class PictureOfTheDayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel.getLiveData().observe(viewLifecycleOwner) { renderData(it) }
         binding.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 if (binding.inputLayout.isEndIconCheckable) {
                     data =
                         Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
+                } else {
                 }
-                else {}
             })
         }
+
 
         binding.chipsGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
@@ -250,7 +253,7 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
-    private fun zoomImage(){
+    private fun zoomImage() {
         binding.imageView.setOnClickListener {
             flag = !flag
             val changeBounds = ChangeBounds()
@@ -258,7 +261,7 @@ class PictureOfTheDayFragment : Fragment() {
             changeBounds.duration = 3000
             changeImageTransform.duration = 3000
             TransitionManager.beginDelayedTransition(binding.main, changeImageTransform)
-            if (flag){
+            if (flag) {
                 binding.imageView.scaleType = ImageView.ScaleType.CENTER_CROP
             } else {
                 binding.imageView.scaleType = ImageView.ScaleType.CENTER_INSIDE
@@ -274,6 +277,8 @@ class PictureOfTheDayFragment : Fragment() {
         } else {
             BottomSheetBehavior.from(binding.included.bottomSheetContainer).state = BottomSheetBehavior.STATE_COLLAPSED
             binding.imageView.load(url)
+            binding.included.bottomSheetDescriptionHeader.typeface = Typeface.createFromAsset(requireContext().assets, "fonts/Neucha-Regular.ttf")
+            binding.included.bottomSheetDescription.typeface = Typeface.createFromAsset(requireContext().assets, "fonts/Neucha-Regular.ttf")
             binding.included.bottomSheetDescriptionHeader.text = data.serverResponseData.title
             binding.included.bottomSheetDescription.text = data.serverResponseData.explanation
         }
