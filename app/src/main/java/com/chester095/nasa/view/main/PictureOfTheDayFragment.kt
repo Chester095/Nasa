@@ -6,9 +6,13 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -277,11 +281,54 @@ class PictureOfTheDayFragment : Fragment() {
         } else {
             BottomSheetBehavior.from(binding.included.bottomSheetContainer).state = BottomSheetBehavior.STATE_COLLAPSED
             binding.imageView.load(url)
-            binding.included.bottomSheetDescriptionHeader.typeface = Typeface.createFromAsset(requireContext().assets, "fonts/Neucha-Regular.ttf")
-            binding.included.bottomSheetDescription.typeface = Typeface.createFromAsset(requireContext().assets, "fonts/Neucha-Regular.ttf")
-            binding.included.bottomSheetDescriptionHeader.text = data.serverResponseData.title
-            binding.included.bottomSheetDescription.text = data.serverResponseData.explanation
+
+            binding.included.bottomSheetDescription.typeface =
+                Typeface.createFromAsset(requireContext().assets, "fonts/Neucha-Regular.ttf")
+            binding.included.bottomSheetDescription.text =
+                data.serverResponseData.explanation
+
+            binding.included.bottomSheetDescriptionHeader.typeface =
+                Typeface.createFromAsset(requireContext().assets, "fonts/Neucha-Regular.ttf")
+            binding.included.bottomSheetDescriptionHeader.text =
+                data.serverResponseData.title
+
+            val spannableStart = SpannableString(binding.included.bottomSheetDescriptionHeader.text)
+            binding.included.bottomSheetDescriptionHeader.setText(spannableStart, TextView.BufferType.SPANNABLE)
+            val spannable = binding.included.bottomSheetDescriptionHeader.text as SpannableString
+            var colorFirstNumber = 0
+
+            val map = mapOf(
+                0 to ContextCompat.getColor(requireContext(), R.color.red),
+                1 to ContextCompat.getColor(requireContext(), R.color.orange),
+                2 to ContextCompat.getColor(requireContext(), R.color.yellow_700),
+                3 to ContextCompat.getColor(requireContext(), R.color.green),
+                4 to ContextCompat.getColor(requireContext(), R.color.blue),
+                5 to ContextCompat.getColor(requireContext(), R.color.purple_700),
+                6 to ContextCompat.getColor(requireContext(), R.color.purple_500)
+            )
+
+
+
+            Thread(Runnable {
+                for (m in 0..50) {
+                    for (g in 0..6) {
+                        var colorNumber = colorFirstNumber
+                        for (i in 0 until binding.included.bottomSheetDescriptionHeader.text.length) {
+                            if (colorNumber == 5) colorNumber = 0 else colorNumber += 1
+                            spannable.setSpan(
+                                ForegroundColorSpan(map.getValue(colorNumber)),
+                                i, i + 1,
+                                Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                            )
+                        }
+                        if (colorFirstNumber == 5) colorFirstNumber = 0 else colorFirstNumber += 1
+                    }
+                    Thread.sleep(50)
+                }
+            })
         }
     }
+
+
 
 }
