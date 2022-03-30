@@ -12,6 +12,7 @@ import com.chester095.nasa.view.animations.AnimationsFragment
 import com.chester095.nasa.view.bottomnavigation.ApiBottomFragment
 import com.chester095.nasa.view.coordinator.CoordinatorFragment
 import com.chester095.nasa.view.recycler.RecyclerFragment
+import com.chester095.nasa.view.ux.UXFragment
 import com.chester095.nasa.view.viewpager.ApiFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -34,6 +35,7 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
         binding.navigationView.setNavigationItemSelectedListener { menu ->
             when (menu.itemId) {
+                R.id.navigation_ux -> navigateTo(UXFragment())
                 R.id.navigation_recycler -> navigateTo(RecyclerFragment())
                 R.id.navigation_animation -> navigateTo(AnimationsFragment())
                 R.id.navigation_style -> navigateTo(StylesFragment())

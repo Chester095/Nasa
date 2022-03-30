@@ -159,5 +159,6 @@
     <string name="weight_more_thousand"><![CDATA[вес > 1000]]></string>
     <string name="weight_less_thousand"><![CDATA[вес <= 1000]]></string>
     <string name="filtration">Фильтрация</string>
+    <string name="navigation_ux_design">UX design</string>
 
 </resources>
