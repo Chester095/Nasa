@@ -33,6 +33,15 @@
         <item name="useMaterialThemeColors">false</item>
     </style>
 
+    <style name="MyThemeSplash" parent="MyBaseTheme">
+        <item name="nasaBackgroundColor">@color/white</item>
+        <item name="nasaPrimaryColor">@color/white</item>
+        <item name="nasaPrimaryDarkColor">@color/white</item>
+        <item name="swipeIndicatorActive">@color/white</item>
+        <item name="swipeIndicatorPassive">@color/white</item>
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
     <style name="MyBaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="nasaBackgroundColor">@color/indigo_900</item>
         <item name="nasaPrimaryColor">@color/indigo_50</item>

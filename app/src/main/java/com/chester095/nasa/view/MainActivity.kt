@@ -3,6 +3,7 @@ package com.chester095.nasa.view
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.chester095.nasa.R
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
     fun getCurrentTheme(): Int {
         val sharedPreferences = getSharedPreferences(KEY_SP, MODE_PRIVATE)
-        return sharedPreferences.getInt(KEY_CURRENT_THEME, -1)
+        return sharedPreferences.getInt(KEY_CURRENT_THEME, R.style.MyThemeOrange)
     }
 
 
