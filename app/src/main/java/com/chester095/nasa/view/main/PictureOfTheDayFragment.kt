@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
@@ -294,15 +295,31 @@ class PictureOfTheDayFragment : Fragment() {
 
             val spannableStart = SpannableString(binding.included.bottomSheetDescriptionHeader.text)
             binding.included.bottomSheetDescriptionHeader.setText(spannableStart, TextView.BufferType.SPANNABLE)
-            colorText(0)
-            Thread.sleep(500)
-            colorText(1)
-            Thread.sleep(500)
-            colorText(2)
+            countdown(1)
         }
     }
 
-    private fun colorText(colorFirstNumber:Int){
+    private lateinit var spannableStart: SpannableString
+    fun countdown(i: Int = 1) {
+        var currentCount = i
+        val x = object : CountDownTimer(20000, 100) {
+            override fun onTick(millisUntilFinished: Long) {
+                colorText(currentCount)
+                currentCount = if (++currentCount > 5) 1 else currentCount
+            }
+
+            override fun onFinish() {
+                countdown(currentCount)
+            }
+        }
+        x.start()
+    }
+
+    private fun colorText(colorFirstNumber: Int) {
+        val spannable = binding.included.bottomSheetDescriptionHeader.text as SpannableString
+        var colorNumber = colorFirstNumber
+        spannableStart = binding.included.bottomSheetDescriptionHeader.text as SpannableString
+
         val map = mapOf(
             0 to ContextCompat.getColor(requireContext(), R.color.red),
             1 to ContextCompat.getColor(requireContext(), R.color.orange),
@@ -312,8 +329,14 @@ class PictureOfTheDayFragment : Fragment() {
             5 to ContextCompat.getColor(requireContext(), R.color.purple_700),
             6 to ContextCompat.getColor(requireContext(), R.color.purple_500)
         )
-        val spannable = binding.included.bottomSheetDescriptionHeader.text as SpannableString
-        var colorNumber = colorFirstNumber
+
+        val spans = spannableStart.getSpans(
+            0, spannableStart.length,
+            ForegroundColorSpan::class.java
+        )
+
+        for (span in spans) spannableStart.removeSpan(span)
+
         for (i in 0 until binding.included.bottomSheetDescriptionHeader.text.length) {
             if (colorNumber == 5) colorNumber = 0 else colorNumber += 1
             spannable.setSpan(
@@ -323,7 +346,6 @@ class PictureOfTheDayFragment : Fragment() {
             )
         }
         binding.included.bottomSheetDescriptionHeader.text = spannable
-//        if (colorFirstNumber == 5) colorFirstNumber = 0 else colorFirstNumber += 1
     }
 
 
